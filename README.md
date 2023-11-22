@@ -1,5 +1,5 @@
 # 2D roguelike hra v Unity
-moje individuální maturitní práce za 4.ročník v IT
+moje individuální maturitní práce za 4. ročník v IT
 
 ## zadání:
 Cílem práce je vytvořit 2D hru inspirovanou existující hrou **The Binding of Isaac.** Hra bude obsahovat
