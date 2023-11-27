@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class Player_Shooting : MonoBehaviour 
 {
+    Player player;
+
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed; //6
     public float spawnpointOffset; //0.65f
-    public float fireRate; //0.85f = default
+    public static float fireRate; //0.85f = default
     private float nextFire = 0.0F;
+
+    void Start() {
+        player = GetComponent<Player>();   
+    }
 
     void Update()
     {
@@ -40,7 +46,7 @@ public class Player_Shooting : MonoBehaviour
 
     void ShootBullet(Vector2 direction, float offsetX, float offsetY)
     {
-        nextFire = Time.time + fireRate;
+        nextFire = Time.time + player.fireRate;
         bulletSpawnPoint.position = new Vector2(bulletSpawnPoint.position.x + offsetX, bulletSpawnPoint.position.y + offsetY);
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         bulletSpawnPoint.position = new Vector2(bulletSpawnPoint.position.x - offsetX, bulletSpawnPoint.position.y - offsetY);
