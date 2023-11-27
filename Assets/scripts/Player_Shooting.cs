@@ -8,7 +8,7 @@ public class Player_Shooting : MonoBehaviour
 {
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 5;
+    public float bulletSpeed; //6
     public float spawnpointOffset; //0.65f
     public float fireRate; //0.85f = default
     private float nextFire = 0.0F;
