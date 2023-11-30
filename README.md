@@ -14,4 +14,4 @@ bossfightu. Vytvořená hra bude obsahovat:
 
 Grafické prvky pro hru mohou být kromě vlastních použity i cizí, v souladu s licenčními podmínkami.
 #
-Romaňuk 2023
+Listopad 2023
