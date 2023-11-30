@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float hp;
-    public float dmg;
-    public float speed;
-    public float fireRate;
+    public float hp; //default: 6
+    public float dmg; //default: 12
+    public float speed; //default: 4
+    public float fireRate; //default: 0.85
 
     /*public Player(float h, float d, float s, float fr)
     {
@@ -25,5 +25,15 @@ public class Player : MonoBehaviour
         dmg = d;
         speed = s;
         fireRate = fr;
+    }
+
+    public void GetDamage(float damageTaken)
+    {
+        hp -= damageTaken;
+        if(hp <= 0)
+        {
+            Debug.Log("hráč umřel");
+            Destroy(gameObject);
+        }
     }
 }

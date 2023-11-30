@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    Player player;
+    public Player _player;
+    public Enemy _enemy1;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Player>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _enemy1 = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -26,13 +28,25 @@ public class bullet : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) 
+    void OnTriggerEnter2D(Collider2D colEnter) 
     {
-        Debug.Log("LOL");
-    }
-
-    void DealDamage()
-    {
+        //ignoruje bullet prefab:
+        if(!colEnter.CompareTag("Bullet"))
+        {
+            if(colEnter.CompareTag("Player"))
+            {
+                _player.GetDamage(1);
+                Destroy(gameObject);
+            }
+            if(colEnter.CompareTag("Enemy"))
+            {
+                _enemy1.GetDamage(_player.dmg);
+                Destroy(gameObject);
+            }
+        }
+        else{
+            Debug.Log("hittnuls střelu");
+        }
         
     }
 
