@@ -4,33 +4,57 @@ using UnityEngine;
 
 public class enemy_movement : MonoBehaviour
 {
+    Enemy _enemy;
+    Player _player;
+
     public Rigidbody2D rb;
-    float time = 0f;
-    float timeDelay = 1f;
     private Vector2 moveDirection;
 
+    //timers in seconds
+    float time = 0f;
+    float time2 = 0f;
+    float timeDelay = 1f; 
 
-    // Start is called before the first frame update
-    void Update()
+    void Start()
     {
-        
+        _enemy = GetComponent<Enemy>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        //vector towards players position:
+        moveDirection = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        move();
         time += 1f * Time.deltaTime;
         if(time > timeDelay)
         {
-            time = 0f;
-            moveDirection = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)).normalized;
-            moveRandomly();
+            moveDirection = Vector2.zero;
+            time2 += 1f * Time.deltaTime;
+            if(time2 > timeDelay)
+            {
+                time = 0f;
+                time2 = 0f;
+                //vector towards players position:
+                moveDirection = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
+            }
         }
-        moveDirection = Vector2.zero;
     }
 
-    void moveRandomly()
+    void move()
     {
-        rb.velocity = new Vector2(moveDirection.x * 1, moveDirection.y * 1);
+        rb.velocity = new Vector2(moveDirection.x * _enemy.speed, moveDirection.y * _enemy.speed);
     }
+
+    //player gets damage on collision with enemy
+    void OnCollisionEnter2D(Collision2D collider) 
+    {
+        if(collider.gameObject.tag == "Player")
+        {
+            _player.GetDamage(1);
+        }
+    }
+        
+    
 }

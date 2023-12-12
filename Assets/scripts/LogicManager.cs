@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LogicManager : MonoBehaviour
@@ -34,4 +35,18 @@ public class LogicManager : MonoBehaviour
                 break;
         }
     }*/
+
+    Player _player;
+    TMP_Text _stats;
+
+    private void Awake() {
+        //hp:  |  dmg:  |  speed:  |  fire rate:
+
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
+    }
+
+    private void Update() {
+        _stats.text = $"hp: {_player.hp} |  dmg: {_player.dmg} |  speed: {_player.speed} |  fire rate: {_player.fireRate}";
+    }
 }
