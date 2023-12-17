@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,17 +10,17 @@ public class playerselect : MonoBehaviour
 
     public void Blue()
     {
-        PlayerPrefs.SetString("player", "blue");
+        PlayerPrefs.SetInt("selectedPlayer", 1);
     }
 
     public void Green()
     {
-        PlayerPrefs.SetString("player", "green");
+        PlayerPrefs.SetInt("selectedPlayer", 2);
     }
 
     public void Red()
     {
-        PlayerPrefs.SetString("player", "red");
+        PlayerPrefs.SetInt("selectedPlayer", 3);
     }
 
     public void StartGame()

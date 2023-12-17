@@ -9,37 +9,30 @@ public class enemy_movement : MonoBehaviour
 
     public Rigidbody2D rb;
     private Vector2 moveDirection;
-
-    //timers in seconds
-    float time = 0f;
-    float time2 = 0f;
-    float timeDelay = 1f; 
+    byte moveState = 0;
 
     void Start()
     {
         _enemy = GetComponent<Enemy>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-        //vector towards players position:
-        moveDirection = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
+        charge();
     }
 
     void FixedUpdate()
     {
         move();
-        time += 1f * Time.deltaTime;
-        if(time > timeDelay)
-        {
-            moveDirection = Vector2.zero;
-            time2 += 1f * Time.deltaTime;
-            if(time2 > timeDelay)
-            {
-                time = 0f;
-                time2 = 0f;
-                //vector towards players position:
-                moveDirection = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
-            }
-        }
+
+        switch(moveState){
+            case 0:
+                CancelInvoke("charge");
+                Invoke("stopMoving", 1.2f);
+                break;
+            case 1:
+                CancelInvoke("stopMoving");
+                Invoke("charge", 0.8f);
+                break;
+        } 
     }
 
     void move()
@@ -47,6 +40,20 @@ public class enemy_movement : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * _enemy.speed, moveDirection.y * _enemy.speed);
     }
 
+    void charge()
+    {
+        //vector towards players position:
+        moveDirection = new Vector2(_player.transform.position.x - transform.position.x, _player.transform.position.y - transform.position.y).normalized;
+        moveState = 0;
+    }
+
+    void stopMoving()
+    {
+        moveDirection = Vector2.zero;
+        moveState = 1;
+    }
+
+    
     //player gets damage on collision with enemy
     void OnCollisionEnter2D(Collision2D collider) 
     {

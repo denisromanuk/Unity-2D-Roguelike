@@ -5,13 +5,17 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     private Player _player;
-    private Enemy _enemy;
+    private List<Enemy> _enemies = new List<Enemy>();
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+
+		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) 
+        {
+			_enemies.Add(enemy.GetComponent<Enemy>());
+		}
     }
 
     // Update is called once per frame
@@ -32,9 +36,16 @@ public class bullet : MonoBehaviour
     {
         if(colEnter.CompareTag("Enemy"))
         {
-            Debug.Log("ENEMY");
-            _enemy.GetDamage(_player.dmg);
-            Destroy(gameObject);
+            //zjisti kterej enemy triggernul Trigger:
+            foreach (Enemy enemy in _enemies)
+            {
+                if (colEnter.gameObject == enemy.gameObject)
+                {
+                    enemy.GetDamage(_player.dmg);
+                    Destroy(gameObject);
+                    break;
+                }
+            }
         }
         if(colEnter.CompareTag("TileMap"))
         {
