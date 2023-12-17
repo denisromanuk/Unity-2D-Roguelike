@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
     private Player _player;
-    private List<Enemy> _enemies = new List<Enemy>();
+    private List<GameObject> _enemies = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,7 @@ public class bullet : MonoBehaviour
 
 		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) 
         {
-			_enemies.Add(enemy.GetComponent<Enemy>());
+			_enemies.Add(enemy);
 		}
     }
 
@@ -37,11 +38,14 @@ public class bullet : MonoBehaviour
         if(colEnter.CompareTag("Enemy"))
         {
             //zjisti kterej enemy triggernul Trigger:
-            foreach (Enemy enemy in _enemies)
+            foreach (GameObject enemy in _enemies)
             {
                 if (colEnter.gameObject == enemy.gameObject)
                 {
-                    enemy.GetDamage(_player.dmg);
+                    if(!colEnter.gameObject.GetComponent<Enemy2>())
+                    {
+                        enemy.GetComponent<Enemy>().GetDamage(_player.dmg);
+                    }
                     Destroy(gameObject);
                     break;
                 }
@@ -52,6 +56,4 @@ public class bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 }

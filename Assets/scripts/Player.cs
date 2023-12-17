@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
         hp -= damageTaken;
         if(hp <= 0)
         {
-            Debug.Log("hráč umřel");
             Destroy(gameObject);
         }
     }

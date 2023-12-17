@@ -11,7 +11,7 @@ public class enemy_bullet : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        _enemy = GameObject.FindObjectOfType<Enemy>();
     }
 
     // Update is called once per frame
@@ -32,7 +32,6 @@ public class enemy_bullet : MonoBehaviour
     {
         if(colEnter.CompareTag("Player"))
         {
-            Debug.Log("PLAYER");
             _player.GetDamage(_enemy.dmg);
             Destroy(gameObject);
         }

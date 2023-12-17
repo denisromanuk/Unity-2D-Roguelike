@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
         hp -= damageTaken;
         if(hp <= 0)
         {
-            Debug.Log("enemy1 umřel");
             Destroy(gameObject);
         }
     }
