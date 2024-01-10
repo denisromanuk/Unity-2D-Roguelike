@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6058827029869310729}
   - component: {fileID: 3929000741472602455}
   - component: {fileID: 6459214023606862444}
+  - component: {fileID: 3061643864220717614}
   m_Layer: 0
   m_Name: Blue
   m_TagString: Player
@@ -110,8 +111,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.19607843, g: 0.23529412, b: 0.74509805, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 5351dfbcde09fe247899acde8f16432b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -239,3 +240,24 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 696485685377582385}
   bulletPrefab: {fileID: 5128911463525816758, guid: f81989f5e43dc9d46936f17e6c13e721, type: 3}
   bulletSpeed: 6
+--- !u!95 &3061643864220717614
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183398290238068037}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ab189545fc0edb458928a58efbc51cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -8,6 +8,7 @@ public class Player_Shooting : MonoBehaviour
 {
     Player _player;
 
+    private Animator _animator;
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed; //6
@@ -16,6 +17,7 @@ public class Player_Shooting : MonoBehaviour
 
     void Start() {
         _player = GetComponent<Player>();
+        _animator = gameObject.GetComponent<Animator>();
 
         spawnpointOffset = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f; //0.011f je perfektní spot :)
     }
@@ -23,6 +25,8 @@ public class Player_Shooting : MonoBehaviour
     void Update()
     {
         Shooting();
+        StoppedShooting();
+        
     }
 
     void Shooting()
@@ -30,18 +34,30 @@ public class Player_Shooting : MonoBehaviour
         if(Input.GetKey(KeyCode.UpArrow) && Time.time > nextFire)
         {
             ShootBullet(bulletSpawnPoint.up, 0f, spawnpointOffset);
+            _animator.SetInteger("anim_state", 1); // head_up
         }
         else if(Input.GetKey(KeyCode.RightArrow) && Time.time > nextFire)
         {
             ShootBullet(bulletSpawnPoint.right, spawnpointOffset, 0f);
+            _animator.SetInteger("anim_state", 2); // head_right
         }
         else if(Input.GetKey(KeyCode.DownArrow) && Time.time > nextFire)
         {
             ShootBullet((bulletSpawnPoint.up*-1), 0f, -spawnpointOffset);
+            _animator.SetInteger("anim_state", 3); // head_down
         }
         else if(Input.GetKey(KeyCode.LeftArrow) && Time.time > nextFire)
         {
             ShootBullet((bulletSpawnPoint.right*-1), -spawnpointOffset, 0f);
+            _animator.SetInteger("anim_state", 4); // head_left
+        }
+    }
+
+    void StoppedShooting()
+    {
+        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            _animator.SetInteger("anim_state", 0); // head_static |nestřílí
         }
     }
 
