@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b07afa268070184fabf60dacc1e24ab
+guid: 0e5c8137c518fb243b5a68d08ecd3e44
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,53 +110,53 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_head_idle
+      name: green_head_idle
       rect:
         serializedVersion: 2
-        x: 1
-        y: 21
-        width: 145
-        height: 121
+        x: 0
+        y: 17
+        width: 149
+        height: 122
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 3, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4b89e7b37122b645b42b14e896dfb2e
-      internalID: -2105416452
+      spriteID: ff02037c4f9bb7b41bbb3e057fd1e0da
+      internalID: 1704064789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_head_down
+      name: green_head_down
       rect:
         serializedVersion: 2
         x: 210
-        y: 20
+        y: 17
         width: 145
         height: 121
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ac73f66b7533954b8a34224f33583ea
-      internalID: -2029355657
+      spriteID: 0a407be05afe29540b9b61d1ac9dca10
+      internalID: -1395439497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_head_right
+      name: green_head_right
       rect:
         serializedVersion: 2
-        x: 425
-        y: 14
+        x: 423
+        y: 11
         width: 169
         height: 121
       alignment: 9
@@ -166,19 +166,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8d277dfd6ae6ff43b56b46870f2aef1
-      internalID: -970632005
+      spriteID: 4a0724e3debb44940b0eafaaca61821d
+      internalID: -1552019331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_head_up
+      name: green_head_up
       rect:
         serializedVersion: 2
         x: 646
-        y: 9
-        width: 145
+        y: 6
+        width: 146
         height: 141
       alignment: 9
       pivot: {x: 0.51, y: 0.43}
@@ -187,18 +187,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5671d55eeda9bc346a51ce74a018817d
-      internalID: -595703077
+      spriteID: 3227c4a2ff2851f4baeea9c40f135115
+      internalID: 1440107559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_head_left
+      name: green_head_left
       rect:
         serializedVersion: 2
         x: 830
-        y: 14
+        y: 11
         width: 173
         height: 121
       alignment: 9
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fce23425af76974a89e37d4f3af7a5c
-      internalID: -1350729558
+      spriteID: 62c588674f6834d408660581e6bbcd7c
+      internalID: 278225092
       vertices: []
       indices: 
       edges: []
@@ -225,11 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      blue_head_down: -2029355657
-      blue_head_idle: -2105416452
-      blue_head_left: -1350729558
-      blue_head_right: -970632005
-      blue_head_up: -595703077
+      green_head_down: -1395439497
+      green_head_idle: 1704064789
+      green_head_left: 278225092
+      green_head_right: -1552019331
+      green_head_up: 1440107559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

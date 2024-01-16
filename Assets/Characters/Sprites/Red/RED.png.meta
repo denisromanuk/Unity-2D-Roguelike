@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c26d9bd21544c3d45a32735088b5992c
+guid: 7aa4dfc8114e6e14ea89634adeb12891
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: head_static
+      name: red_head_idle
       rect:
         serializedVersion: 2
-        x: 69
-        y: 40
-        width: 150
+        x: 1
+        y: 17
+        width: 145
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3342aff318de623408f92966079264d9
-      internalID: -1549315338
+      spriteID: 09ffd668bd132404087050f4d4115fa2
+      internalID: -8450802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: head_down
+      name: red_head_down
       rect:
         serializedVersion: 2
-        x: 272
-        y: 31
-        width: 159
-        height: 129
+        x: 210
+        y: 16
+        width: 145
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,71 +145,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69706dc0c6590444086f38e1147bac3b
-      internalID: -274385149
+      spriteID: 07d71c1adf4c3f2418e5d66edc85c38b
+      internalID: 739144197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: head_right
+      name: red_head_right
       rect:
         serializedVersion: 2
-        x: 491
-        y: 36
-        width: 178
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        x: 423
+        y: 11
+        width: 169
+        height: 121
+      alignment: 9
+      pivot: {x: 0.43, y: 0.5}
+      border: {x: 0, y: 0, z: 24, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc178b962b11d804d8bccafe4cc3e3aa
-      internalID: -687176037
+      spriteID: f9d93955d3f5bd84e8d1f5d6a036e1d3
+      internalID: -449377422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: head_up
+      name: red_head_up
       rect:
         serializedVersion: 2
-        x: 714
-        y: 34
-        width: 148
-        height: 144
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        x: 646
+        y: 5
+        width: 145
+        height: 141
+      alignment: 9
+      pivot: {x: 0.51, y: 0.43}
+      border: {x: 0, y: 0, z: 0, w: 22}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f97e9580a7322e4bbf6a84363dfce50
-      internalID: -1205753640
+      spriteID: ed9ec58e0bc491d469cb7b138c5e1e77
+      internalID: -1400201216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: head_left
+      name: red_head_left
       rect:
         serializedVersion: 2
-        x: 901
-        y: 34
-        width: 178
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        x: 830
+        y: 10
+        width: 174
+        height: 121
+      alignment: 9
+      pivot: {x: 0.57, y: 0.5}
+      border: {x: 23, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 297e8631af64e71409a778f303a4ebe3
-      internalID: 1395169264
+      spriteID: 8fab9c01689fcd64885782618077a231
+      internalID: -1975203138
       vertices: []
       indices: 
       edges: []
@@ -225,11 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      head_down: -274385149
-      head_left: 1395169264
-      head_right: -687176037
-      head_static: -1549315338
-      head_up: -1205753640
+      red_head_down: 739144197
+      red_head_idle: -8450802
+      red_head_left: -1975203138
+      red_head_right: -449377422
+      red_head_up: -1400201216
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
