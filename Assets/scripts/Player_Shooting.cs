@@ -38,7 +38,7 @@ public class Player_Shooting : MonoBehaviour
         }
         else if(Input.GetKey(KeyCode.RightArrow) && Time.time > nextFire)
         {
-            ShootBullet(bulletSpawnPoint.right, spawnpointOffset, 0f);
+            ShootBullet(bulletSpawnPoint.right, spawnpointOffset, -0.1f);
             _animator.SetInteger("anim_state", 2); // head_right
         }
         else if(Input.GetKey(KeyCode.DownArrow) && Time.time > nextFire)
@@ -48,7 +48,7 @@ public class Player_Shooting : MonoBehaviour
         }
         else if(Input.GetKey(KeyCode.LeftArrow) && Time.time > nextFire)
         {
-            ShootBullet((bulletSpawnPoint.right*-1), -spawnpointOffset, 0f);
+            ShootBullet((bulletSpawnPoint.right*-1), -spawnpointOffset, -0.1f);
             _animator.SetInteger("anim_state", 4); // head_left
         }
     }
