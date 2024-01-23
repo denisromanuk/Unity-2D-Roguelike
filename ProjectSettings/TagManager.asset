@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Stats
   - TileMap
+  - Room
+  - StartRoom
   layers:
   - Default
   - TransparentFX
