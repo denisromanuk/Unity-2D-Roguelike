@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
-    public int MaxRoomCount; //default: 5
+    public int MaxRoomCount; //default: 7
 
     public GameObject RoomPrefab;
 
@@ -25,12 +26,13 @@ public class RoomGeneration : MonoBehaviour
 
         foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room")) 
         {
-            SpawnRooms(0, MaxRoomCount, room);
+            SpawnRooms(0, 3, room);
 		}
     }
 
     void Update() 
     {
+        AddRemaining();
         Debug.Log($"max: {MaxRoomCount}");
     }
 
@@ -70,6 +72,19 @@ public class RoomGeneration : MonoBehaviour
             {
                 InstantiateRoomPrefab(RoomPrefab, rng);
                 spawnedCount++;
+            }
+        }
+
+        
+    }
+
+    void AddRemaining()
+    {
+        if(MaxRoomCount > 0)
+        {
+            foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room")) 
+            {
+                SpawnRooms(0, 3, room);
             }
         }
     }

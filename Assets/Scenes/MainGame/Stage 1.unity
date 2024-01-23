@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0300c8a3aea0cb34bb74c7418751fbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRoomCount: 5
+  MaxRoomCount: 7
   RoomPrefab: {fileID: 4826415467370965006, guid: 3800c91b62ccf1e4ea63deab1b579363, type: 3}
 --- !u!4 &612008616 stripped
 Transform:
