@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
+    private PresetGeneration _PresetGenerator;
+
     public int RequiredRoomCount; //default: 7
 
     public GameObject RoomPrefab;
@@ -20,6 +22,8 @@ public class RoomGeneration : MonoBehaviour
 
     void Start()
     {
+        _PresetGenerator = GameObject.Find("RoomPresetGenerator").GetComponent<PresetGeneration>();
+
         currentRoomsPositions.Add(new Vector2(0, 0)); //StartRoom position
 
         SpawnRooms(1, 4, gameObject);
@@ -65,7 +69,6 @@ public class RoomGeneration : MonoBehaviour
                 spawnedCount++;
             }
         }
-        
     }
 
     void AddRemaining()
@@ -81,8 +84,10 @@ public class RoomGeneration : MonoBehaviour
 
     void InstantiateRoomPrefab(GameObject prefab, Vector3 position)
     {
-        Instantiate(prefab, position, Quaternion.identity);
+        GameObject room = Instantiate(prefab, position, Quaternion.identity);
         currentRoomsPositions.Add((Vector2)position);
         RequiredRoomCount--;
+
+        _PresetGenerator.GeneratePresets(room);
     }
 }
