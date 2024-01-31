@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
-    private PresetGeneration _PresetGenerator;
-
     public int RequiredRoomCount; //default: 7
 
     public GameObject RoomPrefab;
+
+    public List<GameObject> EnemyRoomPresets = new List<GameObject>();
 
     private Vector2[] spawnpoints = {
         new Vector2(0, 12.2f), //up
@@ -22,72 +22,80 @@ public class RoomGeneration : MonoBehaviour
 
     void Start()
     {
-        _PresetGenerator = GameObject.Find("RoomPresetGenerator").GetComponent<PresetGeneration>();
-
         currentRoomsPositions.Add(new Vector2(0, 0)); //StartRoom position
 
-        SpawnRooms(1, 4, gameObject);
-
-        foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room")) 
-        {
-            SpawnRooms(0, 3, room);
-		}
+        SpawnRooms();
     }
 
     void Update() 
     {
-        AddRemaining();
         //Debug.Log($"max: {RequiredRoomCount}");
     }
 
-    void SpawnRooms(int minTimes, int maxTimes, GameObject caller)
+    void SpawnRooms()
     {
-        int spawnedCount = 0;
-
-        for(int i = 0; i < spawnpoints.Length; i++)
+        //startroom spawns 1-4 rooms:
+        foreach(GameObject startroom in GameObject.FindGameObjectsWithTag("StartRoom"))
         {
-            if(Random.Range(0,2) != 0) //50% chance to spawn
-            {
-                if(spawnedCount >= maxTimes || RequiredRoomCount <= 0)
-                {
-                    return;
-                }
+            int startroomsCount = Random.Range(1,5); //1-4
 
-                if(!currentRoomsPositions.Contains((Vector2)caller.transform.position + spawnpoints[i]))
-                {
-                    InstantiateRoomPrefab(RoomPrefab, (Vector2)caller.transform.position + spawnpoints[i]);
-                    spawnedCount++;
+            if(startroomsCount >= RequiredRoomCount){
+                startroomsCount = RequiredRoomCount;
+            }
+
+            for (int i = 0; i < startroomsCount; i++)
+            {
+                if(IsPositionAlreadyInList((Vector2)startroom.transform.position + spawnpoints[i])){
+                    continue;
                 }
+                InstantiateRoomPrefab(RoomPrefab, (Vector2)startroom.transform.position + spawnpoints[i]);
             }
         }
-        if(spawnedCount < minTimes)
+
+        while(RequiredRoomCount > 0)
         {
-            Vector3 rng = (Vector2)caller.transform.position + spawnpoints[Random.Range(0,4)];
-            if(!currentRoomsPositions.Contains((Vector2)rng))
+            foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room"))
             {
-                InstantiateRoomPrefab(RoomPrefab, rng);
-                spawnedCount++;
+                int roomsCount = Random.Range(0,5); //0-4
+
+                for (int i = 0; i < roomsCount; i++)
+                {
+                    if(RequiredRoomCount <= 0){
+                        break;
+                    }
+
+                    if(IsPositionAlreadyInList((Vector2)room.transform.position + spawnpoints[i])){
+                        continue;
+                    }
+                    InstantiateRoomPrefab(RoomPrefab, (Vector2)room.transform.position + spawnpoints[i]);
+                }
             }
         }
     }
 
-    void AddRemaining()
+    bool IsPositionAlreadyInList(Vector2 position)
     {
-        if(RequiredRoomCount > 0)
+        for (int i = 0; i < currentRoomsPositions.Count; i++)
         {
-            foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room")) 
-            {
-                SpawnRooms(0, 3, room);
+            if (currentRoomsPositions[i] == position){
+                return true;
             }
         }
+        return false;
     }
 
     void InstantiateRoomPrefab(GameObject prefab, Vector3 position)
     {
-        GameObject room = Instantiate(prefab, position, Quaternion.identity);
+        GameObject room = Instantiate(prefab, (Vector2)position, Quaternion.identity);
         currentRoomsPositions.Add((Vector2)position);
         RequiredRoomCount--;
 
-        _PresetGenerator.GeneratePresets(room);
+        //GeneratePresets(room);
+    }
+
+    void GeneratePresets(GameObject enemyroom)
+    {
+        GameObject rngPreset = EnemyRoomPresets[Random.Range(0, EnemyRoomPresets.Count)];
+        Instantiate(rngPreset, (Vector2)enemyroom.transform.position, Quaternion.identity, enemyroom.transform);
     }
 }
