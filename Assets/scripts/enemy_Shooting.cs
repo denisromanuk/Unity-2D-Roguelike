@@ -15,16 +15,29 @@ public class Enemy_Script : MonoBehaviour
 
     private byte shootingState = 1;
 
-    void Start() {
-        _enemy = GetComponent<Enemy>();
-
-        spawnpointOffset_straight = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f;
-        spawnpointOffset_diagonal = (transform.localScale.x * Mathf.Sqrt(2))/2;
+    void Awake() 
+    {
+        
     }
 
+    public bool startShooting = false;
+    public bool setup = false;
     void Update()
     {
-        Shooting();
+        if(setup)
+        {
+            _enemy = GetComponent<Enemy>();
+
+            spawnpointOffset_straight = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f;
+            spawnpointOffset_diagonal = (transform.localScale.x * Mathf.Sqrt(2))/2;
+            setup = false;
+        }
+
+        if(startShooting)
+        {
+            Shooting();
+        }
+        
     }
 
     void Shooting()

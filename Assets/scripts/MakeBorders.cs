@@ -8,11 +8,13 @@ public class RoomEdgeTrigger : MonoBehaviour
     public Tile wall;
     public Tilemap roomtilemap;
 
+    //positions for each door placement:
     private Vector3Int[] up = {new Vector3Int(-1, 5, 0), new Vector3Int(0, 5, 0)};
     private Vector3Int[] right = {new Vector3Int(10, 0, 0), new Vector3Int(10, -1, 0)};
     private Vector3Int[] down = {new Vector3Int(-1, -6, 0), new Vector3Int(0, -6, 0)};
     private Vector3Int[] left = {new Vector3Int(-11, 0, 0), new Vector3Int(-11, -1, 0)};
 
+    //list of all neighbor rooms each room colides with:
     List<GameObject> collidedRooms = new List<GameObject>();
 
     void OnTriggerStay2D(Collider2D collider) 
@@ -28,21 +30,20 @@ public class RoomEdgeTrigger : MonoBehaviour
         for (int i = 0; i < collidedRooms.Count; i++)
         {
             Vector2 offset = (Vector2)gameObject.transform.position - (Vector2)collidedRooms[i].transform.position;
-            Debug.Log($"{(Vector2)gameObject.transform.position} - {(Vector2)collidedRooms[i].transform.position} = {offset}");
-            Debug.Log(collidedRooms.Count);
+            //Debug.Log($"{(Vector2)gameObject.transform.position} - {(Vector2)collidedRooms[i].transform.position} = {offset}");
+            //Debug.Log(collidedRooms.Count);
 
-            
-            if(offset == new Vector2(0, 12.2f)){ //up
-                RemoveWallTiles(down);
-            }
-            if(offset == new Vector2(21.5f, 0)){ //right
-                RemoveWallTiles(left);
-            }
-            if(offset == new Vector2(0, -12.2f)){ //down
+            if(offset == new Vector2(0, -12.2f)){ //up
                 RemoveWallTiles(up);
             }
-            if(offset == new Vector2(-21.5f, 0)){ //left
+            if(offset == new Vector2(0, 12.2f)){ //down
+                RemoveWallTiles(down);
+            }
+            if(offset == new Vector2(-21.5f, 0)){ //right
                 RemoveWallTiles(right);
+            }
+            if(offset == new Vector2(21.5f, 0)){ //left
+                RemoveWallTiles(left);
             }
         }
     }

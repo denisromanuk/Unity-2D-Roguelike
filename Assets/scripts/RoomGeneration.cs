@@ -90,7 +90,7 @@ public class RoomGeneration : MonoBehaviour
         currentRoomsPositions.Add((Vector2)position);
         RequiredRoomCount--;
 
-        //GeneratePresets(room);
+        GeneratePresets(room);
     }
 
     void GeneratePresets(GameObject enemyroom)

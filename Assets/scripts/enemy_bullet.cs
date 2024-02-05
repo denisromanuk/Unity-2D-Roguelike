@@ -17,15 +17,7 @@ public class enemy_bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x < -12f || transform.position.x > 12f)
-        {
-            Destroy(gameObject);
-        }
-
-        if(transform.position.y < -7f || transform.position.y > 7f)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D colEnter) 

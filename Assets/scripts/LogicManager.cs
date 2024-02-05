@@ -12,8 +12,8 @@ public class LogicManager : MonoBehaviour
     Player _player;
     TMP_Text _stats;
 
-    private void Awake() {
-
+    void Awake() 
+    {
         switch(PlayerPrefs.GetInt("selectedPlayer"))
         {
             case 1:
@@ -27,14 +27,13 @@ public class LogicManager : MonoBehaviour
                 break;
         }
 
-
-        //hp:  |  dmg:  |  speed:  |  fire rate:
-
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
     }
 
-    private void Update() {
+    void Update() 
+    {
+        //hp:  |  dmg:  |  speed:  |  fire rate:
         _stats.text = $"hp: {_player.hp} |  dmg: {_player.dmg} |  speed: {_player.speed} |  fire rate: {_player.fireRate}";
     }
 }
