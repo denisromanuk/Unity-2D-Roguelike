@@ -29,6 +29,7 @@ public class LogicManager : MonoBehaviour
 
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
+        _stats.GetComponent<TMP_Text>().enabled = true;
     }
 
     void Update() 

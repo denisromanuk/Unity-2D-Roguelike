@@ -8,7 +8,7 @@ public class Player_Movement : MonoBehaviour
     public GameObject player;
     public Rigidbody2D rb;
     public Player Player_script;
-    private Vector2 moveDirection;
+    public Vector2 moveDirection;
     
     // Start is called before the first frame update
     void Start()

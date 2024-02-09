@@ -11,36 +11,28 @@ public class enemy_movement : MonoBehaviour
     private Vector2 moveDirection;
     byte moveState = 0;
 
-    public bool startMoving = false;
 
-    public void Setup(Collider2D collider)
+    void Awake()
     {
-        Debug.Log("ENEMY MOVE");
         _enemy = GetComponent<Enemy>();
-        if(collider.GetComponent<Player>())
-        {
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        }
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         charge();
     }
     
     void FixedUpdate()
     {
-        if(startMoving)
-        {
-            move();
+        move();
 
-            switch(moveState){
-                case 0:
-                    CancelInvoke("charge");
-                    Invoke("stopMoving", 1.2f);
-                    break;
-                case 1:
-                    CancelInvoke("stopMoving");
-                    Invoke("charge", 0.8f);
-                    break;
-            } 
-        }
+        switch(moveState){
+            case 0:
+                CancelInvoke("charge");
+                Invoke("stopMoving", 1.2f);
+                break;
+            case 1:
+                CancelInvoke("stopMoving");
+                Invoke("charge", 0.8f);
+                break;
+        } 
     }
 
     void move()

@@ -10,28 +10,18 @@ public class Enemy2 : MonoBehaviour
     public float countdown = 0f;
     private int time = 3;
 
-    public bool startCountdown;
-
-    void Awake() 
-    {
-        startCountdown = false;
-    }
-
     private void FixedUpdate() 
     {
-        if(startCountdown)
+        countdownText.text = time.ToString();
+        countdown += 1f * Time.deltaTime;
+        if(countdown > 0.5f)
         {
-            countdownText.text = time.ToString();
-            countdown += 1f * Time.deltaTime;
-            if(countdown > 0.5f)
-            {
-                countdown = 0f;
-                time--;
-            }
+            countdown = 0f;
+            time--;
+        }
 
-            if(time < 1){
-                Explode();
-            }
+        if(time < 1){
+            Explode();
         }
     }
 

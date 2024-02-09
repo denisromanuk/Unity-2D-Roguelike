@@ -496,6 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77505231d90a674b972e97bd4db8abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 11400000, guid: 5e357ac96d5fa6144b77ec12e9e0048e, type: 2}
 --- !u!1001 &2330989154493687103
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -93,7 +93,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5845349071074197978}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -352,6 +352,7 @@ MonoBehaviour:
   player: {fileID: 9183398290238068037}
   rb: {fileID: 9222775929317351387}
   Player_script: {fileID: 3929000741472602455}
+  moveDirection: {x: 0, y: 0}
 --- !u!114 &3929000741472602455
 MonoBehaviour:
   m_ObjectHideFlags: 0

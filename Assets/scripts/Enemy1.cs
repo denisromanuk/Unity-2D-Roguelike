@@ -23,6 +23,15 @@ public class Enemy : MonoBehaviour
         if(hp <= 0)
         {
             Destroy(gameObject);
+            IsDead();
         }
+    }
+
+    public bool IsDead()
+    {
+        if(hp <= 0){
+            return true;
+        }
+        return false;
     }
 }

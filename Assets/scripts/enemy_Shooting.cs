@@ -17,27 +17,14 @@ public class Enemy_Script : MonoBehaviour
 
     void Awake() 
     {
-        
+        _enemy = GetComponent<Enemy>();
+        spawnpointOffset_straight = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f;
+        spawnpointOffset_diagonal = (transform.localScale.x * Mathf.Sqrt(2))/2;
     }
 
-    public bool startShooting = false;
-    public bool setup = false;
     void Update()
     {
-        if(setup)
-        {
-            _enemy = GetComponent<Enemy>();
-
-            spawnpointOffset_straight = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f;
-            spawnpointOffset_diagonal = (transform.localScale.x * Mathf.Sqrt(2))/2;
-            setup = false;
-        }
-
-        if(startShooting)
-        {
-            Shooting();
-        }
-        
+        Shooting();
     }
 
     void Shooting()
