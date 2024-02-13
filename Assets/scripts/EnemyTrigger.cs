@@ -18,6 +18,8 @@ public class EnemyTrigger : MonoBehaviour
     private List<GameObject> _enemies = new List<GameObject>();
     private List<GameObject> _enemies2 = new List<GameObject>();
 
+    private List<Collider2D> EnemiesInTrigger = new List<Collider2D>();
+
     void Awake() 
     {
         roomtilemap = gameObject.transform.parent.GetChild(0).GetComponent<Tilemap>();
@@ -49,7 +51,21 @@ public class EnemyTrigger : MonoBehaviour
     bool l = false;
     void Update() 
     {
-        /*
+        foreach (Collider2D enemy in EnemiesInTrigger)
+        {
+            if(enemy.IsDestroyed())
+            {
+                Debug.Log("DED");
+                EnemiesInTrigger.Remove(enemy);
+            }
+        }
+        Debug.Log(EnemiesInTrigger.Count);
+
+        if(EnemiesInTrigger.Count <= 0)
+        {
+            u = false; r = false; d = false; l = false;
+        }
+
         if(u){
             AddDoorTiles(up);
         }
@@ -61,9 +77,7 @@ public class EnemyTrigger : MonoBehaviour
         }
         if(l){
             AddDoorTiles(left);
-        }*/
-        
-        //roomtilemap.SetTile(new Vector3Int(0, -6, 0), door);
+        }
     }
 
     void AddDoorTiles(Vector3Int[] tilesposition)
@@ -77,8 +91,6 @@ public class EnemyTrigger : MonoBehaviour
     private bool PlayerInTrigger = false;
     void OnTriggerStay2D(Collider2D collider) 
     {
-        Debug.Log(_enemies.Count);
-
         if(collider.gameObject.tag == "Player")
         {
             PlayerInTrigger = true;
@@ -96,13 +108,18 @@ public class EnemyTrigger : MonoBehaviour
             {
                 if(enemy != null)
                 {
-                    //enemy.GetComponent<enemy_movement>().enabled = true;
-                    //enemy.GetComponent<Enemy_Script>().enabled = true;
+                    enemy.GetComponent<enemy_movement>().enabled = true;
+                    enemy.GetComponent<Enemy_Script>().enabled = true;
                 }
             }
         }
         if(PlayerInTrigger && collider.gameObject.tag == "Enemy")
         {
+            if(!EnemiesInTrigger.Contains(collider))
+            {
+                EnemiesInTrigger.Add(collider);
+            }
+            
             if(roomtilemap.GetTile(up[0]) == null){
                 u = true;
             }
@@ -115,10 +132,6 @@ public class EnemyTrigger : MonoBehaviour
             if(roomtilemap.GetTile(left[0]) == null){
                 l = true;
             }
-        }
-        else
-        {
-            u = false; r = false; d = false; l = false;
         }
     }
 
