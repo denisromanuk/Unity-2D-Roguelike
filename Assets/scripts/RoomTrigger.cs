@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
+    private float teleport_offset = 1.75f;
     private GameObject MainCam;
 
     void Awake() 
@@ -24,20 +25,16 @@ public class CameraTrigger : MonoBehaviour
         if(collider.gameObject.tag == "Player")
         {
             if(playerdirection == Vector2.up){ //up
-                Debug.Log("UP");
-                collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y + 4, collider.transform.position.z);
+                collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y + teleport_offset, collider.transform.position.z);
             }
             if(playerdirection == Vector2.down){ //down
-                Debug.Log("DOWN");
-                collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y - 4, collider.transform.position.z);
+                collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y - teleport_offset, collider.transform.position.z);
             }
             if(playerdirection == Vector2.right){ //right
-                Debug.Log("RIGHT");
-                collider.transform.position = new Vector3(collider.transform.position.x + 4, collider.transform.position.y, collider.transform.position.z);
+                collider.transform.position = new Vector3(collider.transform.position.x + teleport_offset, collider.transform.position.y, collider.transform.position.z);
             }
             if(playerdirection == Vector2.left){ //left
-                Debug.Log("LEFT");
-                collider.transform.position = new Vector3(collider.transform.position.x - 4, collider.transform.position.y, collider.transform.position.z);
+                collider.transform.position = new Vector3(collider.transform.position.x - teleport_offset, collider.transform.position.y, collider.transform.position.z);
             }
         }
     }

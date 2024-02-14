@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
-    public int RequiredRoomCount; //default: 7
+    public int MinRequired; //default: 3
+    public int MaxRequired; //default: 5
+    private int RequiredRoomCount; //default: 7
 
     public GameObject RoomPrefab;
 
@@ -22,6 +24,7 @@ public class RoomGeneration : MonoBehaviour
 
     void Start()
     {
+        RequiredRoomCount = Random.Range(MinRequired, MaxRequired + 1);
         currentRoomsPositions.Add(new Vector2(0, 0)); //StartRoom position
 
         SpawnRooms();

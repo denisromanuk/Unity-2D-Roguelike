@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 11400000, guid: 5e357ac96d5fa6144b77ec12e9e0048e, type: 2}
+  bupre: {fileID: 5128911463525816758, guid: 949f1f713bdbc6c4fbf05ed14f82b869, type: 3}
 --- !u!1001 &348715108082646550
 PrefabInstance:
   m_ObjectHideFlags: 0

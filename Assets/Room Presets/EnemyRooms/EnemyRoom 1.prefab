@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 11400000, guid: 5e357ac96d5fa6144b77ec12e9e0048e, type: 2}
+  bupre: {fileID: 5128911463525816758, guid: 949f1f713bdbc6c4fbf05ed14f82b869, type: 3}
 --- !u!1001 &845492876032455502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -547,10 +548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5600136646009287875}
     m_Modifications:
-    - target: {fileID: 6494760543662165892, guid: e9d8435c092a451408d123d50bb62555, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 96985256037139494, guid: 01dfd62f4d5a26849b95a1cb358de953, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -594,6 +591,10 @@ PrefabInstance:
     - target: {fileID: 4891182419679148217, guid: 01dfd62f4d5a26849b95a1cb358de953, type: 3}
       propertyPath: m_Name
       value: bomber
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494760543662165892, guid: e9d8435c092a451408d123d50bb62555, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

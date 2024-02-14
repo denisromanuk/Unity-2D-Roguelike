@@ -66,6 +66,7 @@ public class Player_Shooting : MonoBehaviour
         nextFire = Time.time + _player.fireRate;
         bulletSpawnPoint.position = new Vector2(bulletSpawnPoint.position.x + offsetX, bulletSpawnPoint.position.y + offsetY);
         var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        bullet.GetComponent<bullet>()._player = _player;
         bulletSpawnPoint.position = new Vector2(bulletSpawnPoint.position.x - offsetX, bulletSpawnPoint.position.y - offsetY);
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
     }

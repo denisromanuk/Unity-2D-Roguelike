@@ -11,14 +11,6 @@ public class Player : MonoBehaviour
     public float speed; //default: 4
     public float fireRate; //default: 0.85
 
-    /*public Player(float h, float d, float s, float fr)
-    {
-        hp = h;
-        dmg = d;
-        speed = s;
-        fireRate = fr;
-    }*/
-
     public void Stats(float h, float d, float s, float fr)
     {
         hp = h;

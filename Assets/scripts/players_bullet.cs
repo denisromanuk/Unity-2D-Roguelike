@@ -5,37 +5,23 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    private Player _player;
-    private List<GameObject> _enemies = new List<GameObject>();
+    public Player _player;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) 
-        {
-			_enemies.Add(enemy);
-		}
+        //_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void OnTriggerEnter2D(Collider2D colEnter) 
     {
-        if(colEnter.CompareTag("Enemy"))
+        if(colEnter.gameObject.tag == "Enemy")
         {
-            //zjisti kterej enemy triggernul Trigger:
-            foreach (GameObject enemy in _enemies)
+            if(!colEnter.gameObject.GetComponent<Enemy2>())
             {
-                if (colEnter.gameObject == enemy.gameObject)
-                {
-                    if(!colEnter.gameObject.GetComponent<Enemy2>())
-                    {
-                        enemy.GetComponent<Enemy>().GetDamage(_player.dmg);
-                    }
-                    Destroy(gameObject);
-                    break;
-                }
+                colEnter.gameObject.GetComponent<Enemy>().GetDamage(_player.dmg);
             }
+            Destroy(gameObject);
         }
         if(colEnter.CompareTag("TileMap"))
         {

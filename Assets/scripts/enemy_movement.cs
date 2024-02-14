@@ -5,7 +5,7 @@ using UnityEngine;
 public class enemy_movement : MonoBehaviour
 {
     Enemy _enemy;
-    Player _player;
+    GameObject _player;
 
     public Rigidbody2D rb;
     private Vector2 moveDirection;
@@ -15,7 +15,7 @@ public class enemy_movement : MonoBehaviour
     void Awake()
     {
         _enemy = GetComponent<Enemy>();
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _player = GameObject.FindGameObjectWithTag("Player");
         charge();
     }
     
@@ -59,7 +59,7 @@ public class enemy_movement : MonoBehaviour
     {
         if(collider.gameObject.tag == "Player")
         {
-            _player.GetDamage(1);
+            collider.gameObject.GetComponent<Player>().GetDamage(1);
         }
     }
         

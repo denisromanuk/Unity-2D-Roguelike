@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class splash : MonoBehaviour
 {
-    private Player _player;
     bool playerDamaged = false;
-
-    void Start() 
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
 
     void FixedUpdate() 
     {
@@ -29,7 +23,7 @@ public class splash : MonoBehaviour
             if(!playerDamaged)
             {
                 //damage player:
-                _player.GetDamage(3);
+                colEnter.gameObject.GetComponent<Player>().GetDamage(3);
                 playerDamaged = true;
             }
         }

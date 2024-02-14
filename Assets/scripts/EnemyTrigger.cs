@@ -55,11 +55,10 @@ public class EnemyTrigger : MonoBehaviour
         {
             if(enemy.IsDestroyed())
             {
-                Debug.Log("DED");
                 EnemiesInTrigger.Remove(enemy);
             }
         }
-        Debug.Log(EnemiesInTrigger.Count);
+        //Debug.Log(EnemiesInTrigger.Count);
 
         if(EnemiesInTrigger.Count <= 0)
         {
@@ -102,19 +101,22 @@ public class EnemyTrigger : MonoBehaviour
                     enemy2.GetComponent<Enemy2>().enabled = true;
                 }
             }
-            
+
             //charger enemies starts shooting & moving:
             foreach (GameObject enemy in _enemies)
             {
                 if(enemy != null)
                 {
                     enemy.GetComponent<enemy_movement>().enabled = true;
+
                     enemy.GetComponent<Enemy_Script>().enabled = true;
                 }
             }
         }
+        
         if(PlayerInTrigger && collider.gameObject.tag == "Enemy")
         {
+            
             if(!EnemiesInTrigger.Contains(collider))
             {
                 EnemiesInTrigger.Add(collider);

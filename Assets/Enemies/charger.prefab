@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8329222765804739244}
   - component: {fileID: 4996441973334958244}
   - component: {fileID: 8468670034762098130}
-  - component: {fileID: 7537552352254149224}
-  - component: {fileID: 7139669081229473374}
+  - component: {fileID: 693556001940499090}
+  - component: {fileID: 6987088455275798362}
   m_Layer: 0
   m_Name: charger
   m_TagString: Enemy
@@ -178,7 +178,7 @@ MonoBehaviour:
   dmg: 1
   speed: 3
   fireRate: 0.9
---- !u!114 &7537552352254149224
+--- !u!114 &693556001940499090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,9 +193,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 8571215299431537107}
   bulletPrefab: {fileID: 5128911463525816758, guid: 949f1f713bdbc6c4fbf05ed14f82b869, type: 3}
   bulletSpeed: 8
-  startShooting: 0
-  setup: 0
---- !u!114 &7139669081229473374
+--- !u!114 &6987088455275798362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4996441973334958244}
-  startMoving: 0
 --- !u!1 &3660314913492448696
 GameObject:
   m_ObjectHideFlags: 0
