@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
+    private float offsetX;
+    private float offsetY;
+
     private float teleport_offset = 1.75f;
     private GameObject MainCam;
 
@@ -14,26 +17,25 @@ public class CameraTrigger : MonoBehaviour
         MainCam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    Vector2 playerdirection;
-
-    private void Update() {
-        
-    }
-
     void OnTriggerExit2D(Collider2D collider) 
     {
         if(collider.gameObject.tag == "Player")
         {
-            if(playerdirection == Vector2.up){ //up
+
+            if(offsetY >= 5.5f)
+            {   //UP
                 collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y + teleport_offset, collider.transform.position.z);
             }
-            if(playerdirection == Vector2.down){ //down
+            if(offsetY <= -5.5f)
+            {   //DOWN
                 collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y - teleport_offset, collider.transform.position.z);
             }
-            if(playerdirection == Vector2.right){ //right
+            if(offsetX >= 10.2f)
+            {   //RIGHT
                 collider.transform.position = new Vector3(collider.transform.position.x + teleport_offset, collider.transform.position.y, collider.transform.position.z);
             }
-            if(playerdirection == Vector2.left){ //left
+            if(offsetX <= -10.2f)
+            {   //LEFT
                 collider.transform.position = new Vector3(collider.transform.position.x - teleport_offset, collider.transform.position.y, collider.transform.position.z);
             }
         }
@@ -43,13 +45,11 @@ public class CameraTrigger : MonoBehaviour
     {
         if(collider.gameObject.tag == "Player")
         {
+            offsetX = collider.transform.position.x - gameObject.transform.position.x;
+            offsetY = collider.transform.position.y - gameObject.transform.position.y;
+
             //focus camera to a room where player is:
             MainCam.transform.position = gameObject.transform.position;
-
-            //players last moving direction:
-            if(collider.GetComponent<Player_Movement>().moveDirection != Vector2.zero){
-                playerdirection = collider.GetComponent<Player_Movement>().moveDirection;
-            }
         }
     }
 }

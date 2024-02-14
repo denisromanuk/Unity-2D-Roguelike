@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
-    public int MinRequired; //default: 3
-    public int MaxRequired; //default: 5
-    private int RequiredRoomCount; //default: 7
+    public int MinRequired; //default: 5
+    public int MaxRequired; //default: 7
+    private int RequiredRoomCount;
 
-    public GameObject RoomPrefab;
+    public GameObject EnemyRoomPrefab;
+    public GameObject TreasureRoomPrefab;
+    public GameObject BossRoomPrefab;
 
     public List<GameObject> EnemyRoomPresets = new List<GameObject>();
 
@@ -20,19 +22,18 @@ public class RoomGeneration : MonoBehaviour
         new Vector2(-21.5f, 0) //left
     };
 
-    private List<Vector2> currentRoomsPositions = new List<Vector2>();
+    private Vector2 StartRoomPosition;
+    private List<Vector2> EnemyRoomPositions = new List<Vector2>();
+    private Vector2 TreasureRoomPosition;
+    private Vector2 BossRoomPosition;
 
     void Start()
     {
         RequiredRoomCount = Random.Range(MinRequired, MaxRequired + 1);
-        currentRoomsPositions.Add(new Vector2(0, 0)); //StartRoom position
+        StartRoomPosition = new Vector2(0, 0); //StartRoom position
 
         SpawnRooms();
-    }
-
-    void Update() 
-    {
-        //Debug.Log($"max: {RequiredRoomCount}");
+        GenerateSpecial();
     }
 
     void SpawnRooms()
@@ -51,10 +52,10 @@ public class RoomGeneration : MonoBehaviour
                 if(IsPositionAlreadyInList((Vector2)startroom.transform.position + spawnpoints[i])){
                     continue;
                 }
-                InstantiateRoomPrefab(RoomPrefab, (Vector2)startroom.transform.position + spawnpoints[i]);
+                InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)startroom.transform.position + spawnpoints[i]);
             }
         }
-
+        
         while(RequiredRoomCount > 0)
         {
             foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room"))
@@ -70,17 +71,81 @@ public class RoomGeneration : MonoBehaviour
                     if(IsPositionAlreadyInList((Vector2)room.transform.position + spawnpoints[i])){
                         continue;
                     }
-                    InstantiateRoomPrefab(RoomPrefab, (Vector2)room.transform.position + spawnpoints[i]);
+                    InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)room.transform.position + spawnpoints[i]);
                 }
             }
         }
     }
 
-    bool IsPositionAlreadyInList(Vector2 position)
+    void GenerateSpecial()
     {
+        float maxX = 0f;
+        float maxY = 0f;
+
+        List<Vector2> currentRoomsPositions = new List<Vector2>();
+        currentRoomsPositions.Add(StartRoomPosition);
+
+        for (int i = 0; i < EnemyRoomPositions.Count; i++)
+        {
+            currentRoomsPositions.Add(EnemyRoomPositions[i]);
+        }
+
         for (int i = 0; i < currentRoomsPositions.Count; i++)
         {
-            if (currentRoomsPositions[i] == position){
+            if(System.Math.Abs(currentRoomsPositions[i].x) > maxX){
+                maxX = currentRoomsPositions[i].x;
+                BossRoomPosition = currentRoomsPositions[i];
+            }
+            if(System.Math.Abs(currentRoomsPositions[i].y) > maxY){
+                maxY = currentRoomsPositions[i].y;
+                BossRoomPosition = currentRoomsPositions[i];
+            }
+        }
+        //Debug.Log($"BOSS: {maxX};{maxY}");
+        //Debug.Log(bossRoomPos);
+        foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+        {
+            if((Vector2)room.transform.position == BossRoomPosition)
+            {
+                Destroy(room);
+                EnemyRoomPositions.Remove((Vector2)room.transform.position);
+                break;
+            }
+        }
+        Instantiate(BossRoomPrefab, BossRoomPosition, Quaternion.identity);
+        //currentRoomsPositions. += BossRoomPosition;
+
+        //Debug.Log(enemyrooms.Length);
+        TreasureRoomPosition = EnemyRoomPositions[Random.Range(0,EnemyRoomPositions.Count)];
+        
+        foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+        {
+            if((Vector2)room.transform.position == TreasureRoomPosition)
+            {
+                Destroy(room);
+                EnemyRoomPositions.Remove((Vector2)room.transform.position);
+                break;
+            }
+        }
+        Instantiate(TreasureRoomPrefab, TreasureRoomPosition, Quaternion.identity);
+        //currentRoomsPositions.Add(treasureRoomPos);
+        //Debug.Log(currentRoomsPositions.Count);
+    }
+
+    bool IsPositionAlreadyInList(Vector2 position)
+    {
+        if(position == StartRoomPosition){
+            return true;
+        }
+        if(position == TreasureRoomPosition){
+            return true;
+        }
+        if(position == BossRoomPosition){
+            return true;
+        }
+        for (int i = 0; i < EnemyRoomPositions.Count; i++)
+        {
+            if (EnemyRoomPositions[i] == position){
                 return true;
             }
         }
@@ -89,11 +154,26 @@ public class RoomGeneration : MonoBehaviour
 
     void InstantiateRoomPrefab(GameObject prefab, Vector3 position)
     {
-        GameObject room = Instantiate(prefab, (Vector2)position, Quaternion.identity);
-        currentRoomsPositions.Add((Vector2)position);
-        RequiredRoomCount--;
+        switch (prefab.name)
+        {
+            case "Room":
+                GameObject room = Instantiate(prefab, (Vector2)position, Quaternion.identity);
+                EnemyRoomPositions.Add((Vector2)position);
+                RequiredRoomCount--;
 
-        GeneratePresets(room);
+                GeneratePresets(room);
+                break;
+            case "TreasureRoom":
+                Instantiate(prefab, (Vector2)position, Quaternion.identity);
+                TreasureRoomPosition = (Vector2)position;
+                RequiredRoomCount--;
+                break;
+            case "BossRoom":
+                Instantiate(prefab, (Vector2)position, Quaternion.identity);
+                BossRoomPosition = (Vector2)position;
+                RequiredRoomCount--;
+                break;
+        }
     }
 
     void GeneratePresets(GameObject enemyroom)
