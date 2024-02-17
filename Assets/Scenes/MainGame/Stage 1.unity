@@ -461,6 +461,8 @@ MonoBehaviour:
   - {fileID: 5377334479258926730, guid: 16027a2dd929ada4ca52bf9be3acbd91, type: 3}
   - {fileID: 5377334479258926730, guid: dffe5ba2ff29c054ebaac29687b590f4, type: 3}
   - {fileID: 5377334479258926730, guid: b954f4c7c4b7a5a4585a169afd820228, type: 3}
+  TreasureRoomPresets:
+  - {fileID: 4826415467370965006, guid: 753a9ca494d328442b0b4bd1d8b2786f, type: 3}
 --- !u!1 &632120480
 GameObject:
   m_ObjectHideFlags: 0

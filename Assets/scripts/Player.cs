@@ -19,12 +19,14 @@ public class Player : MonoBehaviour
         fireRate = fr;
     }
 
+    void FixedUpdate() {
+        if(hp <= 0){
+            Destroy(gameObject);
+        }
+    }
+
     public void GetDamage(float damageTaken)
     {
         hp -= damageTaken;
-        if(hp <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }
