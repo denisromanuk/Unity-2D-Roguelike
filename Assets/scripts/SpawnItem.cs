@@ -14,6 +14,6 @@ public class SpawnItem : MonoBehaviour
     public void spawnitem()
     {
         GameObject item = ItemPrefabs[Random.Range(0, ItemPrefabs.Count)];
-        Instantiate(item, ItemSpawner.transform.position, Quaternion.identity);
+        Instantiate(item, ItemSpawner.transform.position, Quaternion.identity, gameObject.transform);
     }
 }

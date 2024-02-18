@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUP: -2
-  dmgUP: 4
+  dmgUP: 3
   speedUP: 0
   fireRateUP: 0

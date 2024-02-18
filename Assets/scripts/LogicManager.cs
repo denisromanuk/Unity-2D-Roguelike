@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LogicManager : MonoBehaviour
 {
@@ -15,22 +16,31 @@ public class LogicManager : MonoBehaviour
 
     void Awake() 
     {
-        switch(PlayerPrefs.GetInt("selectedPlayer"))
+        //create player only in 1st stage:
+        if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            case 1:
-                InstantiatePlayer(bluePrefab);
-                break;
-            case 2:
-                InstantiatePlayer(greenPrefab);
-                break;
-            case 3:
-                InstantiatePlayer(redPrefab);
-                break;
+            switch(PlayerPrefs.GetInt("selectedPlayer"))
+            {
+                case 1:
+                    InstantiatePlayer(bluePrefab);
+                    break;
+                case 2:
+                    InstantiatePlayer(greenPrefab);
+                    break;
+                case 3:
+                    InstantiatePlayer(redPrefab);
+                    break;
+            }
+
+            
         }
 
-        //_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
         _stats.GetComponent<TMP_Text>().enabled = true;
+
+        if(SceneManager.GetActiveScene().buildIndex > 1){
+            _player = FindAnyObjectByType<Player>().GetComponent<Player>();
+        }
     }
 
     void InstantiatePlayer(GameObject playerprefab)
