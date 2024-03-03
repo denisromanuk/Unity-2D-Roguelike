@@ -21,7 +21,8 @@ public class Boss1 : MonoBehaviour
     private Movement _movement;
     private Shooting _shooting;
 
-    void Awake() {
+    //use Start() instead of Awake() to dissable it in inspector
+    void Start() {
         _movement = gameObject.AddComponent<Movement>();
         _shooting = gameObject.AddComponent<Shooting>();
     }
@@ -57,24 +58,26 @@ class Movement : MonoBehaviour
 
     void Update()
     {
-        switch(gameObject.transform.position.x)
-            {
-                case <= -7.3f:
-                    x = 1f;
-                    break;
-                case >= 7.3f:
-                    x = -1f;
-                    break;
-            }
-            switch(gameObject.transform.position.y)
-            {
-                case <= -2.72f:
-                    y = 1f;
-                    break;
-                case >= 2.72f:
-                    y = -1f;
-                    break;
-            }
+        //boss room possition x - boss possition x
+        switch(gameObject.transform.parent.transform.parent.transform.position.x - gameObject.transform.position.x)
+        {
+            case <= -7.3f:
+                x = -1f;
+                break;
+            case >= 7.3f:
+                x = 1f;
+                break;
+        }
+        //boss room possition y - boss possition y
+        switch(gameObject.transform.parent.transform.parent.transform.position.y - gameObject.transform.position.y)
+        {
+            case <= -2.72f:
+                y = -1f;
+                break;
+            case >= 2.72f:
+                y = 1f;
+                break;
+        }
 
         moveDirection = new Vector2(x, y).normalized;
     }
@@ -82,6 +85,15 @@ class Movement : MonoBehaviour
     void FixedUpdate() 
     {
         _boss1.rb.velocity = new Vector2(moveDirection.x * _boss1.speed, moveDirection.y * _boss1.speed);
+    }
+
+    //player gets damage on collision with boss
+    void OnCollisionEnter2D(Collision2D collider) 
+    {
+        if(collider.gameObject.tag == "Player")
+        {
+            collider.gameObject.GetComponent<Player>().GetDamage(2);
+        }
     }
 }
 

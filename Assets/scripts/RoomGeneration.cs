@@ -15,6 +15,7 @@ public class RoomGeneration : MonoBehaviour
 
     public List<GameObject> EnemyRoomPresets = new List<GameObject>();
     public List<GameObject> TreasureRoomPresets = new List<GameObject>();
+    public List<GameObject> BossRoomPresets = new List<GameObject>();
 
     private Vector2[] spawnpoints = {
         new Vector2(0, 12.2f), //up
@@ -174,9 +175,11 @@ public class RoomGeneration : MonoBehaviour
                 GeneratePresets(room, "TreasureRoom");
                 break;
             case "BossRoom":
-                Instantiate(prefab, (Vector2)position, Quaternion.identity);
+                room = Instantiate(prefab, (Vector2)position, Quaternion.identity);
                 BossRoomPosition = (Vector2)position;
                 RequiredRoomCount--;
+
+                GeneratePresets(room, "BossRoom");
                 break;
         }
     }
@@ -196,9 +199,9 @@ public class RoomGeneration : MonoBehaviour
                 Instantiate(rngPreset, (Vector2)room.transform.position, Quaternion.identity, room.transform);
                 break;
             case "BossRoom":
+                rngPreset = BossRoomPresets[Random.Range(0, BossRoomPresets.Count)];
+                Instantiate(rngPreset, (Vector2)room.transform.position, Quaternion.identity, room.transform);
                 break;
         }
-
-        
     }
 }
