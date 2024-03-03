@@ -23,6 +23,11 @@ public class bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if(colEnter.gameObject.tag == "Boss")
+        {
+            colEnter.gameObject.GetComponent<Boss1>().GetDamage(_player.dmg);
+            Destroy(gameObject);
+        }
         if(colEnter.CompareTag("TileMap"))
         {
             Destroy(gameObject);

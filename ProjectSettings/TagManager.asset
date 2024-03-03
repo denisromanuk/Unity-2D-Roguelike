@@ -13,6 +13,7 @@ TagManager:
   - TreasureRoom
   - BossRoom
   - Item
+  - Boss
   layers:
   - Default
   - TransparentFX
