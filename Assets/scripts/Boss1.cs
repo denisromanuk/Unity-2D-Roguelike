@@ -12,6 +12,7 @@ public class Boss1 : MonoBehaviour
 
     [Header("Movement:")]
     public Rigidbody2D rb;
+    public List<BoxCollider2D> triggers = new List<BoxCollider2D>();
 
     [Header("Shooting:")]
     public Transform bulletSpawnPoint;
@@ -58,27 +59,6 @@ class Movement : MonoBehaviour
 
     void Update()
     {
-        //boss room possition x - boss possition x
-        switch(gameObject.transform.parent.transform.parent.transform.position.x - gameObject.transform.position.x)
-        {
-            case <= -7.3f:
-                x = -1f;
-                break;
-            case >= 7.3f:
-                x = 1f;
-                break;
-        }
-        //boss room possition y - boss possition y
-        switch(gameObject.transform.parent.transform.parent.transform.position.y - gameObject.transform.position.y)
-        {
-            case <= -2.72f:
-                y = -1f;
-                break;
-            case >= 2.72f:
-                y = 1f;
-                break;
-        }
-
         moveDirection = new Vector2(x, y).normalized;
     }
 
@@ -93,6 +73,37 @@ class Movement : MonoBehaviour
         if(collider.gameObject.tag == "Player")
         {
             collider.gameObject.GetComponent<Player>().GetDamage(2);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D trigger) 
+    {
+        if(trigger.CompareTag("TileMap"))
+        {
+            foreach (BoxCollider2D boxTrigger in _boss1.triggers)
+            {
+                if(trigger.IsTouching(boxTrigger))
+                {
+                    switch(boxTrigger.offset.x)
+                    {
+                        case -0.51f:
+                            x = 1f;
+                            break;
+                        case 0.51f:
+                            x = -1f;
+                            break;
+                    }
+                    switch(boxTrigger.offset.y)
+                    {
+                        case -0.5f:
+                            y = 1f;
+                            break;
+                        case 0.5f:
+                            y = -1f;
+                            break;
+                    }
+                }
+            }
         }
     }
 }
