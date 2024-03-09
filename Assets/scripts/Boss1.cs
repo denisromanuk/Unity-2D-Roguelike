@@ -19,13 +19,13 @@ public class Boss1 : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed; //8
 
-    private Movement _movement;
-    private Shooting _shooting;
+    private Boss1Movement _movement;
+    private Boss1Shooting _shooting;
 
     //use Start() instead of Awake() to dissable it in inspector
     void Start() {
-        _movement = gameObject.AddComponent<Movement>();
-        _shooting = gameObject.AddComponent<Shooting>();
+        _movement = gameObject.AddComponent<Boss1Movement>();
+        _shooting = gameObject.AddComponent<Boss1Shooting>();
     }
 
     public void Stats(float h, float d, float s, float fr)
@@ -46,7 +46,7 @@ public class Boss1 : MonoBehaviour
     }
 }
 
-class Movement : MonoBehaviour
+class Boss1Movement : MonoBehaviour
 {
     Boss1 _boss1;
     float x = 1f;
@@ -108,7 +108,7 @@ class Movement : MonoBehaviour
     }
 }
 
-class Shooting : MonoBehaviour
+class Boss1Shooting : MonoBehaviour
 {
     Boss1 _boss1;
     private float spawnpointOffset_straight;

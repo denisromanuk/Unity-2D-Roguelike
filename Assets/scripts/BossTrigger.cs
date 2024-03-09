@@ -90,7 +90,9 @@ public class BossTrigger : MonoBehaviour
             {
                 if(boss != null)
                 {
-                    boss.GetComponent<Boss1>().enabled = true;
+                    if(boss.GetComponent<Boss1>()){
+                        boss.GetComponent<Boss1>().enabled = true;
+                    }
                 }
             }
         }

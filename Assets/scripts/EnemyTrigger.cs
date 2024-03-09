@@ -17,6 +17,7 @@ public class EnemyTrigger : MonoBehaviour
 
     private List<GameObject> _enemies = new List<GameObject>();
     private List<GameObject> _enemies2 = new List<GameObject>();
+    private List<GameObject> _enemies3 = new List<GameObject>();
 
     private List<Collider2D> EnemiesInTrigger = new List<Collider2D>();
 
@@ -40,6 +41,14 @@ public class EnemyTrigger : MonoBehaviour
                 if(enemy.transform.IsChildOf(gameObject.transform))
                 {
                     _enemies2.Add(enemy);
+                }
+            }
+
+            if(enemy.GetComponent<Enemy3>())
+            {
+                if(enemy.transform.IsChildOf(gameObject.transform))
+                {
+                    _enemies3.Add(enemy);
                 }
             }
         }
@@ -110,6 +119,15 @@ public class EnemyTrigger : MonoBehaviour
                     enemy.GetComponent<enemy_movement>().enabled = true;
 
                     enemy.GetComponent<Enemy_Script>().enabled = true;
+                }
+            }
+
+            //ghost enemies starts moving:
+            foreach (GameObject enemy3 in _enemies3)
+            {
+                if(enemy3 != null)
+                {
+                    enemy3.GetComponent<Enemy3>().enabled = true;
                 }
             }
         }

@@ -17,9 +17,11 @@ public class bullet : MonoBehaviour
     {
         if(colEnter.gameObject.tag == "Enemy")
         {
-            if(!colEnter.gameObject.GetComponent<Enemy2>())
-            {
+            if(colEnter.gameObject.GetComponent<Enemy>()){
                 colEnter.gameObject.GetComponent<Enemy>().GetDamage(_player.dmg);
+            }
+            if(colEnter.gameObject.GetComponent<Enemy3>()){
+                colEnter.gameObject.GetComponent<Enemy3>().GetDamage(_player.dmg);
             }
             Destroy(gameObject);
         }
