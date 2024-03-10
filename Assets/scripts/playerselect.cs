@@ -23,6 +23,12 @@ public class playerselect : MonoBehaviour
     public void StartGame()
     {
         Screen.SetResolution(1920, 1080, 0);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
+    }
+
+    public void ReturnToMenu()
+    {
+        Screen.SetResolution(1920, 1080, 0);
+        SceneManager.LoadScene(0);
     }
 }

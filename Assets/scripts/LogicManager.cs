@@ -7,9 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class LogicManager : MonoBehaviour
 {
+    [Header("Characters:")]
     public GameObject bluePrefab;
     public GameObject greenPrefab;
     public GameObject redPrefab;
+
+    [Header("UI:")]
+    public GameObject DeathScreen;
+    public GameObject VictoryScreen;
+    public TMP_Text _stage;
+
     Player _player;
     GameObject p;
     TMP_Text _stats;
@@ -17,7 +24,7 @@ public class LogicManager : MonoBehaviour
     void Awake() 
     {
         //create player only in 1st stage:
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if(SceneManager.GetActiveScene().buildIndex == 2)
         {
             switch(PlayerPrefs.GetInt("selectedPlayer"))
             {
@@ -31,14 +38,12 @@ public class LogicManager : MonoBehaviour
                     InstantiatePlayer(redPrefab);
                     break;
             }
-
-            
         }
 
         _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
         _stats.GetComponent<TMP_Text>().enabled = true;
 
-        if(SceneManager.GetActiveScene().buildIndex > 1){
+        if(SceneManager.GetActiveScene().buildIndex > 2){
             _player = FindAnyObjectByType<Player>().GetComponent<Player>();
         }
     }
@@ -53,5 +58,26 @@ public class LogicManager : MonoBehaviour
     {
         //hp:  |  dmg:  |  speed:  |  fire rate:
         _stats.text = $"hp: {_player.hp} |  dmg: {_player.dmg} |  speed: {_player.speed} |  fire rate: {_player.fireRate}";
+
+        _stage.text = $"Stage {SceneManager.GetActiveScene().buildIndex - 1}";
+        
+
+        if(_player.IsDestroyed())
+        {
+            DeathScreen.SetActive(true);
+            //Time.timeScale = 0f; //freeze time
+        }
+    }
+
+    public void Restart(){
+        SceneManager.LoadScene(2);
+    }
+
+    public void ReturnToMenu(){
+        SceneManager.LoadScene(0);
+    }
+
+    public void Victory(){
+        VictoryScreen.SetActive(true);
     }
 }

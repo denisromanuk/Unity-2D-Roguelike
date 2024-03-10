@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class NextStage : MonoBehaviour
 {
     private Animator _animator;
+    private LogicManager _logicmanager;
     public bool bossdead = false;
 
     void Awake() {
         _animator = gameObject.GetComponent<Animator>();
+        _logicmanager = FindAnyObjectByType<LogicManager>().GetComponent<LogicManager>();
     }
 
     void Update() 
@@ -28,7 +30,12 @@ public class NextStage : MonoBehaviour
         {
             DontDestroyOnLoad(collider);
             collider.transform.position = new Vector3(0, -2, 10);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if(SceneManager.GetActiveScene().buildIndex + 1 < 5){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else{
+                _logicmanager.Victory();
+            }
         }
     }
 }
