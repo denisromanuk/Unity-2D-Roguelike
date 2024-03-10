@@ -20,6 +20,12 @@ public class playerselect : MonoBehaviour
         PlayerPrefs.SetInt("selectedPlayer", 3);
     }
 
+    public void RandomSelect()
+    {
+        PlayerPrefs.SetInt("selectedPlayer", Random.Range(1, 4));
+        StartGame();
+    }
+
     public void StartGame()
     {
         Screen.SetResolution(1920, 1080, 0);

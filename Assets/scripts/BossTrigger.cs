@@ -26,7 +26,7 @@ public class BossTrigger : MonoBehaviour
 
         foreach(GameObject boss in GameObject.FindGameObjectsWithTag("Boss")) 
         {
-            if(boss.GetComponent<Boss1>())
+            if(boss.GetComponent<Boss1>() || boss.GetComponent<Boss2>())
             {
                 if(boss.transform.IsChildOf(gameObject.transform))
                 {
@@ -49,6 +49,7 @@ public class BossTrigger : MonoBehaviour
                 BossesInTrigger.Remove(boss);
             }
         }
+        //Debug.Log(BossesInTrigger.Count);
 
         if(BossesInTrigger.Count <= 0)
         {
@@ -92,6 +93,9 @@ public class BossTrigger : MonoBehaviour
                 {
                     if(boss.GetComponent<Boss1>()){
                         boss.GetComponent<Boss1>().enabled = true;
+                    }
+                    if(boss.GetComponent<Boss2>()){
+                        boss.GetComponent<Boss2>().enabled = true;
                     }
                 }
             }

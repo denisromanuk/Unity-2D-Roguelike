@@ -49,12 +49,16 @@ public class Boss1 : MonoBehaviour
 class Boss1Movement : MonoBehaviour
 {
     Boss1 _boss1;
-    float x = 1f;
-    float y = -1f;
+    float[] rngSmer = {-1f, 1f};
+    float x;
+    float y;
     Vector2 moveDirection;
 
     void Awake() {
         _boss1 = gameObject.GetComponent<Boss1>();
+
+        x = rngSmer[Random.Range(0, rngSmer.Length)];
+        y = rngSmer[Random.Range(0, rngSmer.Length)];
     }
 
     void Update()

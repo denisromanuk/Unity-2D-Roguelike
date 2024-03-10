@@ -27,7 +27,12 @@ public class bullet : MonoBehaviour
         }
         if(colEnter.gameObject.tag == "Boss")
         {
-            colEnter.gameObject.GetComponent<Boss1>().GetDamage(_player.dmg);
+            if(colEnter.gameObject.GetComponent<Boss1>()){
+                colEnter.gameObject.GetComponent<Boss1>().GetDamage(_player.dmg);
+            }
+            if(colEnter.gameObject.GetComponent<Boss2>()){
+                colEnter.gameObject.GetComponent<Boss2>().GetDamage(_player.dmg);
+            }
             Destroy(gameObject);
         }
         if(colEnter.CompareTag("TileMap"))
