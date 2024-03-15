@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy1 : MonoBehaviour
 {
     public float hp; //default: 40
     public float dmg; //default: 1
@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
         speed = s;
         fireRate = fr;
     }
+    //start so it can be disabled in inspector:
+    void Start(){}
 
     public void GetDamage(float damageTaken)
     {

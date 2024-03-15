@@ -131,11 +131,11 @@ public class LogicManager : MonoBehaviour
                 break;
             case "Beer(Clone)":
                 itemName.text = "Beer";
-                itemDesc.text = $"'cheers' \n HP +";
+                itemDesc.text = $"'Cheers' \n HP +";
                 break;
             case "Crocs(Clone)":
                 itemName.text = "Crocs";
-                itemDesc.text = $"'they're in sport mode' \n SPEED +";
+                itemDesc.text = $"'They're in sport mode' \n SPEED +";
                 break;
             case "EnergyDrink(Clone)":
                 itemName.text = "Energy Drink";

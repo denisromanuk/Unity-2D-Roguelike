@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float hp; //default: 6
-    public float dmg; //default: 12
-    public float speed; //default: 4
-    public float fireRate; //default: 0.85
+    public float hp; //default: 6, max: 12
+    public float dmg; //default: 12, min: 0
+    public float speed; //default: 4, min: 0, max: 10
+    public float fireRate; //default: 0.85f, max: 0.3f
 
     public void Stats(float h, float d, float s, float fr)
     {
@@ -20,9 +20,23 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate() {
+        limitStats();
+
         if(hp <= 0){
             Destroy(gameObject);
         }
+    }
+
+    void limitStats(){
+        //hp:
+        if(hp > 12){hp = 12;}
+        //dmg:
+        if(dmg < 0){dmg = 0;}
+        //speed:
+        if(speed > 10){speed = 10;}
+        if(speed < 0){speed = 0;}
+        //firerate:
+        if(fireRate < 0.3f){fireRate = 0.3f;}
     }
 
     public void GetDamage(float damageTaken)

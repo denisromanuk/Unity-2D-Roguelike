@@ -17,21 +17,29 @@ public class bullet : MonoBehaviour
     {
         if(colEnter.gameObject.tag == "Enemy")
         {
-            if(colEnter.gameObject.GetComponent<Enemy>()){
-                colEnter.gameObject.GetComponent<Enemy>().GetDamage(_player.dmg);
+            if(colEnter.gameObject.GetComponent<Enemy1>()){
+                if(colEnter.gameObject.GetComponent<Enemy1>().enabled){
+                    colEnter.gameObject.GetComponent<Enemy1>().GetDamage(_player.dmg);
+                }
             }
             if(colEnter.gameObject.GetComponent<Enemy3>()){
-                colEnter.gameObject.GetComponent<Enemy3>().GetDamage(_player.dmg);
+                if(colEnter.gameObject.GetComponent<Enemy3>().enabled){
+                    colEnter.gameObject.GetComponent<Enemy3>().GetDamage(_player.dmg);
+                }
             }
             Destroy(gameObject);
         }
         if(colEnter.gameObject.tag == "Boss")
         {
             if(colEnter.gameObject.GetComponent<Boss1>()){
-                colEnter.gameObject.GetComponent<Boss1>().GetDamage(_player.dmg);
+                if(colEnter.gameObject.GetComponent<Boss1>().enabled){
+                    colEnter.gameObject.GetComponent<Boss1>().GetDamage(_player.dmg);
+                }
             }
             if(colEnter.gameObject.GetComponent<Boss2>()){
-                colEnter.gameObject.GetComponent<Boss2>().GetDamage(_player.dmg);
+                if(colEnter.gameObject.GetComponent<Boss2>().enabled){
+                    colEnter.gameObject.GetComponent<Boss2>().GetDamage(_player.dmg);
+                }
             }
             Destroy(gameObject);
         }

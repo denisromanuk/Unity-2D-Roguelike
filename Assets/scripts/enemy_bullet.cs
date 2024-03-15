@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class enemy_bullet : MonoBehaviour
 {
-    private Enemy _enemy;
+    private Enemy1 _enemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        _enemy = FindObjectOfType<Enemy>();
+        _enemy = FindObjectOfType<Enemy1>();
     }
 
     void OnTriggerEnter2D(Collider2D colEnter) 

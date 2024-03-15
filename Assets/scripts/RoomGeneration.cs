@@ -28,6 +28,9 @@ public class RoomGeneration : MonoBehaviour
     private List<Vector2> EnemyRoomPositions = new List<Vector2>();
     private Vector2 TreasureRoomPosition;
     private Vector2 BossRoomPosition;
+    List<Vector2> currentRoomsPositions = new List<Vector2>();
+    float maxX = 0f;
+    float maxY = 0f;
 
     void Start()
     {
@@ -35,7 +38,6 @@ public class RoomGeneration : MonoBehaviour
         StartRoomPosition = new Vector2(0, 0); //StartRoom position
 
         SpawnRooms();
-        GenerateSpecial();
     }
 
     void SpawnRooms()
@@ -51,10 +53,12 @@ public class RoomGeneration : MonoBehaviour
 
             for (int i = 0; i < startroomsCount; i++)
             {
-                if(IsPositionAlreadyInList((Vector2)startroom.transform.position + spawnpoints[i])){
+                int rng = Random.Range(0, spawnpoints.Length);
+
+                if(IsPositionAlreadyInList((Vector2)startroom.transform.position + spawnpoints[rng])){
                     continue;
                 }
-                InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)startroom.transform.position + spawnpoints[i]);
+                InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)startroom.transform.position + spawnpoints[rng]);
             }
         }
         
@@ -66,25 +70,24 @@ public class RoomGeneration : MonoBehaviour
 
                 for (int i = 0; i < roomsCount; i++)
                 {
+                    int rng = Random.Range(0, spawnpoints.Length);
+
                     if(RequiredRoomCount <= 0){
                         break;
                     }
 
-                    if(IsPositionAlreadyInList((Vector2)room.transform.position + spawnpoints[i])){
+                    if(IsPositionAlreadyInList((Vector2)room.transform.position + spawnpoints[rng])){
                         continue;
                     }
-                    InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)room.transform.position + spawnpoints[i]);
+                    InstantiateRoomPrefab(EnemyRoomPrefab, (Vector2)room.transform.position + spawnpoints[rng]);
                 }
             }
         }
+        GenerateSpecial();
     }
 
     void GenerateSpecial()
     {
-        float maxX = 0f;
-        float maxY = 0f;
-
-        List<Vector2> currentRoomsPositions = new List<Vector2>();
         currentRoomsPositions.Add(StartRoomPosition);
 
         for (int i = 0; i < EnemyRoomPositions.Count; i++)
@@ -103,8 +106,7 @@ public class RoomGeneration : MonoBehaviour
                 BossRoomPosition = currentRoomsPositions[i];
             }
         }
-        //Debug.Log($"BOSS: {maxX};{maxY}");
-        //Debug.Log(bossRoomPos);
+        Debug.Log($"BOSS: {maxX};{maxY}");
         foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
         {
             if((Vector2)room.transform.position == BossRoomPosition)

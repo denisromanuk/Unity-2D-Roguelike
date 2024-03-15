@@ -27,7 +27,7 @@ public class EnemyTrigger : MonoBehaviour
 
         foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) 
         {
-            if(enemy.GetComponent<Enemy>())
+            if(enemy.GetComponent<Enemy1>())
             {
                 if(enemy.transform.IsChildOf(gameObject.transform))
                 {
@@ -116,8 +116,8 @@ public class EnemyTrigger : MonoBehaviour
             {
                 if(enemy != null)
                 {
+                    enemy.GetComponent<Enemy1>().enabled = true;
                     enemy.GetComponent<enemy_movement>().enabled = true;
-
                     enemy.GetComponent<Enemy_Script>().enabled = true;
                 }
             }

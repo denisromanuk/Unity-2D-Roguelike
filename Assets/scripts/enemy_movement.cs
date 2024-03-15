@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enemy_movement : MonoBehaviour
 {
-    Enemy _enemy;
+    Enemy1 _enemy;
     GameObject _player;
 
     public Rigidbody2D rb;
@@ -14,7 +14,7 @@ public class enemy_movement : MonoBehaviour
 
     void Awake()
     {
-        _enemy = GetComponent<Enemy>();
+        _enemy = GetComponent<Enemy1>();
         _player = GameObject.FindGameObjectWithTag("Player");
         charge();
     }

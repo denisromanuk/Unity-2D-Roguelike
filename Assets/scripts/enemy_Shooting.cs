@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_Script : MonoBehaviour
 {
-    Enemy _enemy;
+    Enemy1 _enemy;
 
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
@@ -17,7 +17,7 @@ public class Enemy_Script : MonoBehaviour
 
     void Awake() 
     {
-        _enemy = GetComponent<Enemy>();
+        _enemy = GetComponent<Enemy1>();
         spawnpointOffset_straight = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f;
         spawnpointOffset_diagonal = (transform.localScale.x * Mathf.Sqrt(2))/2;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss1 : MonoBehaviour
 {
     [Header("Boss stats:")]
-    public float hp; //default: 280
+    public float hp; //default: 360
     public float dmg; //default: 1
     public float speed; //default: 3
     public float fireRate; //default: 2.5
