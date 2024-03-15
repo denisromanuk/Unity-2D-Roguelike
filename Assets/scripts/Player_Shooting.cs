@@ -9,6 +9,7 @@ public class Player_Shooting : MonoBehaviour
     Player _player;
 
     private Animator _animator;
+    private AudioManager _audiomanager;
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed; //6
@@ -18,6 +19,7 @@ public class Player_Shooting : MonoBehaviour
     void Start() {
         _player = GetComponent<Player>();
         _animator = gameObject.GetComponent<Animator>();
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
 
         spawnpointOffset = (transform.localScale.x)/2+(bulletPrefab.transform.localScale.x)/2+0.011f; //0.011f je perfektní spot :)
     }
@@ -69,5 +71,6 @@ public class Player_Shooting : MonoBehaviour
         bullet.GetComponent<bullet>()._player = _player;
         bulletSpawnPoint.position = new Vector2(bulletSpawnPoint.position.x - offsetX, bulletSpawnPoint.position.y - offsetY);
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+        _audiomanager.PlaySFX(_audiomanager.fire);
     }
 }

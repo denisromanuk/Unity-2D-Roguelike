@@ -21,11 +21,13 @@ public class Boss1 : MonoBehaviour
 
     private Boss1Movement _movement;
     private Boss1Shooting _shooting;
+    private AudioManager _audiomanager;
 
     //use Start() instead of Awake() to dissable it in inspector
     void Start() {
         _movement = gameObject.AddComponent<Boss1Movement>();
         _shooting = gameObject.AddComponent<Boss1Shooting>();
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
     }
 
     public void Stats(float h, float d, float s, float fr)
@@ -41,6 +43,11 @@ public class Boss1 : MonoBehaviour
         hp -= damageTaken;
         if(hp <= 0)
         {
+            _audiomanager._musicSource.time = 140;
+            _audiomanager._musicSource.volume = 0.4f;
+            _audiomanager._musicSource.loop = false;
+            _audiomanager._sfxSource.clip = _audiomanager.bossEnd;
+            _audiomanager._sfxSource.Play();
             Destroy(gameObject);
         }
     }

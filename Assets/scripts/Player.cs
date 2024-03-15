@@ -10,6 +10,11 @@ public class Player : MonoBehaviour
     public float dmg; //default: 12, min: 0
     public float speed; //default: 4, min: 0, max: 10
     public float fireRate; //default: 0.85f, max: 0.3f
+    private AudioManager _audiomanager;
+
+    void Awake() {
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
+    }
 
     public void Stats(float h, float d, float s, float fr)
     {
@@ -42,5 +47,6 @@ public class Player : MonoBehaviour
     public void GetDamage(float damageTaken)
     {
         hp -= damageTaken;
+        _audiomanager.PlaySFX(_audiomanager.hit);
     }
 }

@@ -9,6 +9,8 @@ public class BossTrigger : MonoBehaviour
     public Tile door;
     public GameObject trapdoor;
     private Tilemap roomtilemap;
+    private AudioManager _audiomanager;
+    bool newAudio = false;
 
     //positions for each door placement:
     private Vector3Int[] up = {new Vector3Int(-1, 5, 0), new Vector3Int(0, 5, 0)};
@@ -22,6 +24,7 @@ public class BossTrigger : MonoBehaviour
 
     void Awake() 
     {
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
         roomtilemap = gameObject.transform.parent.GetChild(0).GetComponent<Tilemap>();
 
         foreach(GameObject boss in GameObject.FindGameObjectsWithTag("Boss")) 
@@ -80,6 +83,19 @@ public class BossTrigger : MonoBehaviour
     }
 
     private bool PlayerInTrigger = false;
+    bool playedBoss = false;
+
+    void OnTriggerEnter2D(Collider2D collider) 
+    {
+        if(collider.gameObject.tag == "Player" && !playedBoss)
+        {
+            _audiomanager._musicSource.clip = _audiomanager.boss;
+            _audiomanager._musicSource.time = 12.5f;
+            _audiomanager._musicSource.Play();
+            playedBoss = true;
+        }
+    }
+
     void OnTriggerStay2D(Collider2D collider) 
     {
         if(collider.gameObject.tag == "Player")
@@ -104,6 +120,7 @@ public class BossTrigger : MonoBehaviour
         if(PlayerInTrigger && collider.gameObject.tag == "Boss")
         {
             trapdoor.GetComponent<NextStage>().bossdead = false;
+
             
             if(!BossesInTrigger.Contains(collider))
             {
@@ -130,6 +147,12 @@ public class BossTrigger : MonoBehaviour
         if(collider.gameObject.tag == "Player")
         {
             PlayerInTrigger = false;
+            if(_audiomanager._musicSource.clip != _audiomanager.level){
+                _audiomanager._musicSource.volume = 1f;
+                _audiomanager._musicSource.clip = _audiomanager.level;
+                _audiomanager._musicSource.loop = true;
+                _audiomanager._musicSource.Play();
+            }
         }
     }
 }

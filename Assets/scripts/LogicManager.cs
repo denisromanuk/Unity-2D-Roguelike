@@ -39,10 +39,16 @@ public class LogicManager : MonoBehaviour
 
     Player _player;
     GameObject p;
+    AudioManager _audiomanager;
     
 
     void Awake() 
     {
+        //play level music on awake:
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
+        _audiomanager._musicSource.clip = _audiomanager.level;
+        _audiomanager._musicSource.Play();
+
         //create player only in 1st stage:
         if(SceneManager.GetActiveScene().buildIndex == 2)
         {
@@ -157,10 +163,12 @@ public class LogicManager : MonoBehaviour
     }
 
     public void Restart(){
+        _audiomanager._musicSource.Stop();
         SceneManager.LoadScene(2);
     }
 
     public void ReturnToMenu(){
+        Destroy(_audiomanager.gameObject);
         SceneManager.LoadScene(0);
     }
 

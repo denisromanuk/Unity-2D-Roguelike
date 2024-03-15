@@ -9,9 +9,11 @@ public class Item : MonoBehaviour
     public float speedUP;
     public float fireRateUP;
     private LogicManager _logicmanager;
+    private AudioManager _audiomanager;
 
     void Awake() {
         _logicmanager = FindAnyObjectByType<LogicManager>().GetComponent<LogicManager>();
+        _audiomanager = FindAnyObjectByType<AudioManager>().GetComponent<AudioManager>();
     }
 
     public void AddStats(Player _player)
@@ -28,6 +30,7 @@ public class Item : MonoBehaviour
         {
             AddStats(collider.GetComponent<Player>());
             _logicmanager.Item(gameObject.name);
+            _audiomanager.PlaySFX(_audiomanager.item);
             Destroy(gameObject);
         }
     }
