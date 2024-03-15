@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LogicManager : MonoBehaviour
 {
@@ -12,6 +13,25 @@ public class LogicManager : MonoBehaviour
     public GameObject greenPrefab;
     public GameObject redPrefab;
 
+    [Header("Hearts:")]
+    public GameObject[] hearts;
+    public Sprite heart_full;
+    public Sprite heart_half;
+    public Sprite heart_empty;
+    int fullHpCount;
+    int halfHpCount;
+
+    [Header("Stats:")]
+    public TMP_Text _statsDMG;
+    public TMP_Text _statsFIRERATE;
+    public TMP_Text _statsSPEED;
+
+    [Header("Item screen:")]
+    public GameObject ItemInfo;
+    public TMP_Text itemName;
+    public TMP_Text itemDesc;
+
+
     [Header("UI:")]
     public GameObject DeathScreen;
     public GameObject VictoryScreen;
@@ -19,7 +39,7 @@ public class LogicManager : MonoBehaviour
 
     Player _player;
     GameObject p;
-    TMP_Text _stats;
+    
 
     void Awake() 
     {
@@ -40,8 +60,10 @@ public class LogicManager : MonoBehaviour
             }
         }
 
-        _stats = GameObject.FindGameObjectWithTag("Stats").GetComponent<TMP_Text>();
-        _stats.GetComponent<TMP_Text>().enabled = true;
+        //enable stats TMP:
+        _statsDMG.GetComponent<TMP_Text>().enabled = true;
+        _statsFIRERATE.GetComponent<TMP_Text>().enabled = true;
+        _statsSPEED.GetComponent<TMP_Text>().enabled = true;
 
         if(SceneManager.GetActiveScene().buildIndex > 2){
             _player = FindAnyObjectByType<Player>().GetComponent<Player>();
@@ -57,16 +79,81 @@ public class LogicManager : MonoBehaviour
     void Update() 
     {
         //hp:  |  dmg:  |  speed:  |  fire rate:
-        _stats.text = $"hp: {_player.hp} |  dmg: {_player.dmg} |  speed: {_player.speed} |  fire rate: {_player.fireRate}";
+        _statsDMG.text = _player.dmg.ToString();
+        _statsFIRERATE.text = _player.fireRate.ToString();
+        _statsSPEED.text = _player.speed.ToString();
 
         _stage.text = $"Stage {SceneManager.GetActiveScene().buildIndex - 1}";
-        
+
 
         if(_player.IsDestroyed())
         {
             DeathScreen.SetActive(true);
-            //Time.timeScale = 0f; //freeze time
         }
+
+        if(fullHpCount != _player.hp || halfHpCount != _player.hp){
+            fullHpCount = (int)_player.hp / 2; // 5/2 = 2
+            halfHpCount = (int)_player.hp % 2;// 5/2 = 1
+            hpUI();
+        }
+    }
+
+    void hpUI()
+    {
+        for (int i = 0; i < hearts.Length; i++){
+            hearts[i].SetActive(false);
+        }
+        for (int i = 0; i < fullHpCount; i++)
+        {
+            hearts[i].SetActive(true);
+            hearts[i].GetComponent<Image>().sprite = heart_full;
+        }
+        if(halfHpCount != 0){
+            hearts[fullHpCount].SetActive(true);
+            hearts[fullHpCount].GetComponent<Image>().sprite = heart_half;
+        }
+        if(_player.hp <= 0){
+            hearts[0].SetActive(true);
+            hearts[0].GetComponent<Image>().sprite = heart_empty;
+        }
+    }
+
+    public void Item(string itemname){
+        ItemInfo.SetActive(true);
+        Invoke("ItemClose", 2f);
+        Debug.Log(itemname);
+        
+        switch(itemname)
+        {
+            case "AnabolicSteroids(Clone)":
+                itemName.text = "Anabolic Steroids";
+                itemDesc.text = $"'100% natty' \n DMG + \n HP -";
+                break;
+            case "Beer(Clone)":
+                itemName.text = "Beer";
+                itemDesc.text = $"'cheers' \n HP +";
+                break;
+            case "Crocs(Clone)":
+                itemName.text = "Crocs";
+                itemDesc.text = $"'they're in sport mode' \n SPEED +";
+                break;
+            case "EnergyDrink(Clone)":
+                itemName.text = "Energy Drink";
+                itemDesc.text = $"FIRERATE + \n SPEED +";
+                break;
+            case "Lighter(Clone)":
+                itemName.text = "Lighter";
+                itemDesc.text = $"DMG +";
+                break;
+            case "OldPaper(Clone)":
+                itemName.text = "Old Paper";
+                itemDesc.text = $"FIRERATE +";
+                break;
+        }
+    }
+
+    void ItemClose(){
+        ItemInfo.SetActive(false);
     }
 
     public void Restart(){

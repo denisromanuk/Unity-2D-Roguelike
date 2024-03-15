@@ -8,6 +8,11 @@ public class Item : MonoBehaviour
     public float dmgUP;
     public float speedUP;
     public float fireRateUP;
+    private LogicManager _logicmanager;
+
+    void Awake() {
+        _logicmanager = FindAnyObjectByType<LogicManager>().GetComponent<LogicManager>();
+    }
 
     public void AddStats(Player _player)
     {
@@ -22,6 +27,7 @@ public class Item : MonoBehaviour
         if(collider.gameObject.tag == "Player")
         {
             AddStats(collider.GetComponent<Player>());
+            _logicmanager.Item(gameObject.name);
             Destroy(gameObject);
         }
     }

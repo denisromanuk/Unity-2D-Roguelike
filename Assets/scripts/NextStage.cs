@@ -35,6 +35,7 @@ public class NextStage : MonoBehaviour
             }
             else{
                 _logicmanager.Victory();
+                Destroy(collider.gameObject); //destroy current player object
             }
         }
     }
