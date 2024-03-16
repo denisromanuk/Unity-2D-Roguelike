@@ -10,7 +10,6 @@ public class BossTrigger : MonoBehaviour
     public GameObject trapdoor;
     private Tilemap roomtilemap;
     private AudioManager _audiomanager;
-    bool newAudio = false;
 
     //positions for each door placement:
     private Vector3Int[] up = {new Vector3Int(-1, 5, 0), new Vector3Int(0, 5, 0)};

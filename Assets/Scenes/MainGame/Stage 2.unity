@@ -1393,10 +1393,12 @@ MonoBehaviour:
   - {fileID: 5377334479258926730, guid: dffe5ba2ff29c054ebaac29687b590f4, type: 3}
   - {fileID: 5377334479258926730, guid: b954f4c7c4b7a5a4585a169afd820228, type: 3}
   - {fileID: 5377334479258926730, guid: 755ba5c667d626f4aba0fafcfc1e9e86, type: 3}
+  - {fileID: 5377334479258926730, guid: 75c73c1b566051b49b026185cee92cef, type: 3}
   TreasureRoomPresets:
   - {fileID: 4826415467370965006, guid: 753a9ca494d328442b0b4bd1d8b2786f, type: 3}
   BossRoomPresets:
   - {fileID: 5377334479258926730, guid: 06c6f0978c27f694e8afb7ef1ef3b409, type: 3}
+  - {fileID: 5377334479258926730, guid: 8ea1429a322d1b841a12250f1a02e7ad, type: 3}
 --- !u!1 &545923731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,9 +2055,9 @@ RectTransform:
   m_Children:
   - {fileID: 1810629373}
   - {fileID: 1099576181}
-  - {fileID: 1567255938}
   - {fileID: 2114138625}
   - {fileID: 222747568}
+  - {fileID: 1567255938}
   - {fileID: 1173709373}
   - {fileID: 1806146282}
   - {fileID: 406120646}

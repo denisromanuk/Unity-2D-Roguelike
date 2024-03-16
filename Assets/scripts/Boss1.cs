@@ -46,8 +46,8 @@ public class Boss1 : MonoBehaviour
             _audiomanager._musicSource.time = 140;
             _audiomanager._musicSource.volume = 0.4f;
             _audiomanager._musicSource.loop = false;
-            _audiomanager._sfxSource.clip = _audiomanager.bossEnd;
-            _audiomanager._sfxSource.Play();
+            
+            _audiomanager.PlaySFX(_audiomanager.bossEnd);
             Destroy(gameObject);
         }
     }

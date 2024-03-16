@@ -98,8 +98,8 @@ public class LogicManager : MonoBehaviour
         }
 
         if(fullHpCount != _player.hp || halfHpCount != _player.hp){
-            fullHpCount = (int)_player.hp / 2; // 5/2 = 2
-            halfHpCount = (int)_player.hp % 2;// 5/2 = 1
+            fullHpCount = (int)_player.hp / 2;
+            halfHpCount = (int)_player.hp % 2;
             hpUI();
         }
     }
@@ -127,7 +127,6 @@ public class LogicManager : MonoBehaviour
     public void Item(string itemname){
         ItemInfo.SetActive(true);
         Invoke("ItemClose", 2f);
-        Debug.Log(itemname);
         
         switch(itemname)
         {

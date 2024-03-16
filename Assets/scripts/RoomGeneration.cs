@@ -106,7 +106,7 @@ public class RoomGeneration : MonoBehaviour
                 BossRoomPosition = currentRoomsPositions[i];
             }
         }
-        Debug.Log($"BOSS: {maxX};{maxY}");
+        //Debug.Log($"BOSS: {maxX};{maxY}");
         foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
         {
             if((Vector2)room.transform.position == BossRoomPosition)

@@ -14,19 +14,25 @@ public class Boss2 : MonoBehaviour
     public Rigidbody2D rb;
     public List<BoxCollider2D> triggers = new List<BoxCollider2D>();
 
-    [Header("Split 1:")]
-    public List<GameObject> splittedBosses1 = new List<GameObject>();
+    [Header("Splits:")]
+    public List<Transform> spawns = new List<Transform>();
+    public GameObject splitPrefab;
 
     private Boss2Movement _movement;
     private Boss2Split _split;
+    boss2roomaudio _boss2audio;
 
     //use Start() instead of Awake() to dissable it in inspector
     void Start() {
         _movement = gameObject.AddComponent<Boss2Movement>();
         _split = gameObject.AddComponent<Boss2Split>();
+        _boss2audio = FindAnyObjectByType<boss2roomaudio>().GetComponent<boss2roomaudio>();
+        
+        _boss2audio.GetComponent<boss2roomaudio>().enabled = true;
+        _boss2audio.SplitsCount++;
     }
 
-    public void Stats(float h, float d, float s, float fr)
+    public void Stats(float h, float d, float s)
     {
         hp = h;
         dmg = d;
@@ -38,7 +44,8 @@ public class Boss2 : MonoBehaviour
         hp -= damageTaken;
         if(hp <= 0)
         {
-            _split.splitStage++;
+            _boss2audio.SplitsCount--;
+            _split.Split();
             Destroy(gameObject);
         }
     }
@@ -80,7 +87,7 @@ class Boss2Movement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trigger) 
     {
-        if(trigger.CompareTag("TileMap"))
+        if(trigger.CompareTag("TileMap") || trigger.CompareTag("Boss"))
         {
             foreach (BoxCollider2D boxTrigger in _boss2.triggers)
             {
@@ -121,20 +128,15 @@ class Boss2Split : MonoBehaviour
 
     void Update() 
     {
-        Debug.Log(splitStage);
-
-        Split();
+        //Debug.Log(splitStage);
     }
 
-    void Split()
+    public void Split()
     {
-        switch(splitStage)
+        foreach (Transform spawn in _boss2.spawns)
         {
-            case 1:
-                foreach(GameObject splittedBoss in _boss2.splittedBosses1){
-                    splittedBoss.SetActive(true);
-                }
-                break;
+            GameObject _split = Instantiate(_boss2.splitPrefab, spawn.position, Quaternion.identity);
+            _split.GetComponent<Boss2>().enabled = true;
         }
     }
 }
